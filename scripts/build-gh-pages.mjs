@@ -306,28 +306,53 @@ const STATIC_JS = `(() => {
     };
   }
 
-  // Never allow a native POST form submission to hit GitHub Pages (which causes 405)
-  document.addEventListener('submit', async e => {
-    const form = e.target;
-    if (!(form instanceof HTMLFormElement)) return;
-    const act = form.getAttribute('action') || '';
-    if (!act.includes('/cart/add')) return;
-    if (e.defaultPrevented) return;
-    e.preventDefault();
-    const fd = new FormData(form);
-    const r = await fetch(BASE + '/cart/add.js', { method: 'POST', body: fd });
-    const data = await r.json();
-    const qv = form.closest('quick-view-modal');
-    if (qv?.hide) qv.hide();
+  function showToast(msg) {
+    let t = document.getElementById('mv-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'mv-toast';
+      t.style.cssText = 'position:fixed;left:50%;bottom:76px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 18px;border-radius:999px;font:600 13px Poppins,sans-serif;z-index:999999;box-shadow:0 8px 24px rgba(0,0,0,.25);pointer-events:none;transition:opacity .2s';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.style.opacity = '1';
+    clearTimeout(t._tm);
+    t._tm = setTimeout(() => { t.style.opacity = '0'; }, 2200);
+  }
+
+  function openCartDrawer(data) {
     const drawer = document.querySelector('cart-drawer');
     if (drawer) {
       const target = drawer.querySelector('#CartDrawer-sections--19692154126565__cart-drawer');
       if (target && data.sections?.['sections--19692154126565__cart-drawer']) {
         target.outerHTML = data.sections['sections--19692154126565__cart-drawer'];
       }
-      if (drawer.show) drawer.show();
+      drawer.removeAttribute('hidden');
+      if (drawer.show) drawer.show(document.body);
+      drawer.setAttribute('open', '');
     }
-  });
+  }
+
+  // Intercept ALL /cart/add form submits in capture phase so static GitHub Pages always adds & opens Cart Drawer
+  document.addEventListener('submit', async e => {
+    const form = e.target;
+    if (!(form instanceof HTMLFormElement)) return;
+    const act = form.getAttribute('action') || '';
+    if (!act.includes('/cart/add')) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const fd = new FormData(form);
+    const r = await fetch(BASE + '/cart/add.js', { method: 'POST', body: fd });
+    const data = await r.json();
+    const qv = form.closest('quick-view-modal');
+    if (qv) {
+      if (qv.hide) qv.hide();
+      qv.removeAttribute('open');
+      qv.setAttribute('hidden', '');
+    }
+    openCartDrawer(data);
+    showToast('Added to cart (' + (data.item_count || 1) + ')');
+  }, true);
 
   document.addEventListener('click', e => {
     if (e.target.closest('[data-mv-checkout], button[name="checkout"], a[href*="/checkout"]')) {
