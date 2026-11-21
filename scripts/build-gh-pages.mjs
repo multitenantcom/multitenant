@@ -113,21 +113,27 @@ const STATIC_JS = `(() => {
 
   function renderDrawer(state) {
     const html = \`
-      <div id="CartDrawer-sections--19692154126565__cart-drawer">
-        <div class="\${state.item_count > 0 ? 'hidden' : ''} text-center py-8"><p class="h4 mb-2">Your cart is currently empty.</p></div>
-        <div class="\${state.item_count === 0 ? 'hidden' : ''} flex flex-col gap-2">
-          \${state.items.map((it, i) => \`
-            <div class="cart-item flex gap-3 py-4 border-b">
-              <img src="\${esc(it.image)}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:8px">
-              <div style="flex:1">
-                <div style="font-weight:600;font-size:13.5px">\${esc(it.product_title)}</div>
-                <div style="font-size:12.5px;opacity:.75">\${it.quantity} × \${esc(money(it.price_idr))} = <strong>\${esc(money(it.line_price_idr))}</strong></div>
-              </div>
-            </div>\`).join('')}
+      <div id="CartDrawer-sections--19692154126565__cart-drawer" class="drawer__content flex flex-col h-full w-full">
+        <div class="drawer__header" style="padding:14px 16px;border-bottom:1px solid #e5e5e5;display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <h2 id="CartDrawer-Heading" class="drawer__heading h4" style="margin:0">Your cart (\${state.item_count})</h2>
+          <button class="drawer__close-btn" aria-controls="CartDrawer" aria-label="Close" type="button" style="position:static;min-width:44px;min-height:44px;display:grid;place-items:center">✕</button>
         </div>
-        <div class="\${state.item_count === 0 ? 'hidden' : ''} pt-4 border-t">
+        <div class="drawer__body v-scrollable flex-1" style="padding:16px;overflow-y:auto">
+          <div class="\${state.item_count > 0 ? 'hidden' : ''} text-center py-8"><p class="h4 mb-2">Your cart is currently empty.</p></div>
+          <div class="\${state.item_count === 0 ? 'hidden' : ''} flex flex-col gap-2">
+            \${state.items.map((it, i) => \`
+              <div class="cart-item flex gap-3 py-4 border-b" style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #eee;align-items:center">
+                <img src="\${esc(it.image)}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:8px;flex-shrink:0">
+                <div style="flex:1;min-width:0">
+                  <div style="font-weight:600;font-size:13.5px;overflow-wrap:anywhere">\${esc(it.product_title)}</div>
+                  <div style="font-size:12.5px;opacity:.75">\${it.quantity} × \${esc(money(it.price_idr))} = <strong>\${esc(money(it.line_price_idr))}</strong></div>
+                </div>
+              </div>\`).join('')}
+          </div>
+        </div>
+        <div class="\${state.item_count === 0 ? 'hidden' : ''} drawer__footer" style="padding:14px 16px;border-top:1px solid #e5e5e5;background:#fff">
           <div class="flex justify-between items-center mb-3"><span>Subtotal</span><strong>\${esc(money(state.total_price_idr))}</strong></div>
-          <button type="button" class="btn btn--primary w-full" data-mv-checkout>Checkout (\${state.item_count})</button>
+          <button type="button" class="btn btn--primary w-full" style="min-height:44px" data-mv-checkout>Checkout (\${state.item_count})</button>
         </div>
       </div>\`;
     return { 'sections--19692154126565__cart-drawer': html };

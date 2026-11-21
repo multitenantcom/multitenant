@@ -297,22 +297,28 @@ function renderCartSections(cartState, requested = []) {
   }).join('');
 
   const drawerHtml = `
-    <div id="CartDrawer-sections--19692154126565__cart-drawer">
-      <div id="CartDrawerEmpty-sections--19692154126565__cart-drawer" class="${cartState.item_count > 0 ? 'hidden' : ''} text-center py-8">
-        <p class="h4 mb-2">Your cart is currently empty.</p>
-        <a href="/collections/all" class="btn btn--primary">Continue shopping</a>
+    <div id="CartDrawer-sections--19692154126565__cart-drawer" class="drawer__content flex flex-col h-full w-full">
+      <div class="drawer__header" style="padding:14px 16px;border-bottom:1px solid #e5e5e5;display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <h2 id="CartDrawer-Heading" class="drawer__heading h4" style="margin:0">Your cart (${cartState.item_count})</h2>
+        <button class="drawer__close-btn" aria-controls="CartDrawer" aria-label="Close" type="button" style="position:static;min-width:44px;min-height:44px;display:grid;place-items:center">✕</button>
       </div>
-      <div id="CartDrawerBody-sections--19692154126565__cart-drawer" class="${cartState.item_count === 0 ? 'hidden' : ''} flex flex-col gap-2">
-        <cart-items data-section-id="sections--19692154126565__cart-drawer">${itemsHtml}</cart-items>
+      <div class="drawer__body v-scrollable flex-1" style="padding:16px;overflow-y:auto">
+        <div id="CartDrawerEmpty-sections--19692154126565__cart-drawer" class="${cartState.item_count > 0 ? 'hidden' : ''} text-center py-8">
+          <p class="h4 mb-2">Your cart is currently empty.</p>
+          <a href="/collections/all" class="btn btn--primary">Continue shopping</a>
+        </div>
+        <div id="CartDrawerBody-sections--19692154126565__cart-drawer" class="${cartState.item_count === 0 ? 'hidden' : ''} flex flex-col gap-2">
+          <cart-items data-section-id="sections--19692154126565__cart-drawer">${itemsHtml}</cart-items>
+        </div>
       </div>
-      <div id="CartDrawerFooter-sections--19692154126565__cart-drawer" class="${cartState.item_count === 0 ? 'hidden' : ''} pt-4 border-t">
-        <div class="flex justify-between items-center mb-2 text-sm">
+      <div id="CartDrawerFooter-sections--19692154126565__cart-drawer" class="${cartState.item_count === 0 ? 'hidden' : ''} drawer__footer" style="padding:14px 16px;border-top:1px solid #e5e5e5;background:#fff">
+        <div class="flex justify-between items-center mb-3 text-sm">
           <span>Subtotal</span>
           <span class="font-bold text-base">${esc(moneyIdr(cartState.total_price_idr))}</span>
         </div>
-        <div class="flex gap-2 mt-3">
-          <a href="/cart" class="btn btn--secondary flex-1 text-center">View cart</a>
-          <button type="button" class="btn btn--primary flex-1" data-mv-checkout>Checkout (${cartState.item_count})</button>
+        <div class="flex gap-2" style="display:flex;gap:8px;flex-wrap:wrap">
+          <a href="/cart" class="btn btn--secondary flex-1 text-center" style="min-height:44px">View cart</a>
+          <button type="button" class="btn btn--primary flex-1" style="min-height:44px" data-mv-checkout>Checkout (${cartState.item_count})</button>
         </div>
       </div>
     </div>`;
