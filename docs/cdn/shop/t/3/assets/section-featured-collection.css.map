@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["/cdn/shop/t/3/assets/section-featured-collection.css"],
+  "sourcesContent": [".featured-collection .tabs__btn.btn--underline:after {\n  width: 0;\n  transform: none;\n  transition: all 0.5s;\n}\n.featured-collection .tabs__btn.btn--underline:hover:after {\n  transform: none;\n  animation: none;\n}\n.featured-collection .tabs__btn.btn--underline.active:after {\n  width: 100%;\n}\n.featured-collection .tabs__btn.btn--underline:not(.active):not(:hover) {\n  opacity: 0.6;\n}\n.featured-collection .tabs-nav__inner {\n  column-gap: 3.2rem;\n  row-gap: 1.2rem;\n}\n@media (max-width: 767.98px) {\n  .featured-collection .tabs-nav__inner {\n    column-gap: 2.4rem;\n  }\n}\n.featured-collection .card-media,\n.featured-collection .card-media--link,\n.featured-collection .card-media__media {\n  height: 100%;\n}\n"],
+  "mappings": "AAAA,CAAC,oBAAoB,CAAC,SAAS,CAAC,cAAc,OAC5C,MAAO,EACP,UAAW,KACX,WAAY,IAAI,GAClB,CACA,CALC,oBAKoB,CALC,SAKS,CALC,cAKc,MAAM,OAClD,UAAW,KACX,UAAW,IACb,CACA,CATC,oBASoB,CATC,SASS,CATC,cASc,CAAC,MAAM,OACnD,MAAO,IACT,CACA,CAZC,oBAYoB,CAZC,SAYS,CAZC,cAYc,KAAK,CAHJ,OAGY,KAAK,QAC9D,QAAS,EACX,CACA,CAfC,oBAeoB,CAAC,gBACpB,WAAY,OACZ,QAAS,MACX,CACA,OAAO,UAAY,UACjB,CApBD,oBAoBsB,CALD,gBAMlB,WAAY,MACd,CACF,CACA,CAxBC,oBAwBoB,CAAC,WACtB,CAzBC,oBAyBoB,CAAC,iBACtB,CA1BC,oBA0BoB,CAAC,kBACpB,OAAQ,IACV",
+  "names": []
+}

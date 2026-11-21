@@ -1,0 +1,249 @@
+(() => {
+  const BASE = '/multitenant';
+  const STORES = {
+    tukupack: {
+      slug: 'tukupack',
+      name: 'TukuPack',
+      ini: 'TP',
+      primary: '#0058A3',
+      pRgb: '0,88,163',
+      accent: '#FFDA1A',
+      aRgb: '255,218,26',
+      bgRgb: '244,246,249',
+      accentInk: '0,56,107',
+      invBg: '0,62,117',
+      announcement: '🎉 Free Express Delivery on orders Rp 250.000+ · Multi-Warehouse Same-Day Dispatch!'
+    },
+    anekafood: {
+      slug: 'anekafood',
+      name: 'Anekafood Packaging',
+      ini: 'AP',
+      primary: '#E60000',
+      pRgb: '230,0,0',
+      accent: '#FFDA1A',
+      aRgb: '255,218,26',
+      bgRgb: '245,245,245',
+      accentInk: '138,0,0',
+      invBg: '168,0,0',
+      announcement: '✌🏼 Anekafood Packaging — Same-day dispatch from Jakarta Hub!'
+    }
+  };
+
+  const qStore = new URLSearchParams(location.search).get('store');
+  if (qStore && STORES[qStore.toLowerCase()]) localStorage.setItem('mv_gh_store', qStore.toLowerCase());
+  const slug = STORES[localStorage.getItem('mv_gh_store')] ? localStorage.getItem('mv_gh_store') : 'tukupack';
+  const S = STORES[slug];
+  const money = n => 'Rp ' + Math.round(Number(n || 0)).toLocaleString('id-ID');
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
+  // Inject dynamic tenant theme CSS immediately
+  const st = document.createElement('style');
+  st.id = 'mv-tenant-theme';
+  st.textContent = `
+    :root { --mv-primary: ${S.primary}; --mv-accent: ${S.accent}; --color-badge-sale: ${S.primary}; --color-badge-hot: ${S.primary}; --color-badge-new: ${S.accent}; --color-badge-new-text: #000; }
+    .color-scheme-1, .color-scheme-info { --color-background: ${S.bgRgb}; --color-primary: ${S.pRgb}; --color-button: ${S.pRgb}; --color-button-text: 255,255,255; --color-product-price-sale: ${S.pRgb}; --color-progress-bar: ${S.pRgb}; }
+    .color-scheme-2 { --color-primary: ${S.pRgb}; --color-button: ${S.pRgb}; --color-button-text: 255,255,255; --color-product-price-sale: ${S.pRgb}; --color-progress-bar: ${S.pRgb}; }
+    .color-scheme-inverse { --color-background: ${S.invBg}; --color-secondary-background: ${S.pRgb}; --color-primary: ${S.aRgb}; --color-button: ${S.aRgb}; --color-button-text: ${S.accentInk}; --color-border: ${S.pRgb}; }
+    .color-scheme-3, .color-scheme-4, .color-scheme-7 { --color-background: ${S.pRgb}; --color-primary: ${S.aRgb}; --color-button: ${S.aRgb}; --color-button-text: ${S.accentInk}; --color-secondary-button: ${S.pRgb}; --color-secondary-button-border: ${S.aRgb}; --color-secondary-button-text: 255,255,255; }
+    .color-scheme-13 { --color-background: ${S.aRgb}; --color-primary: ${S.pRgb}; --color-text-heading: ${S.accentInk}; --color-foreground: ${S.accentInk}; --color-subtext: ${S.accentInk}; --color-button: ${S.pRgb}; --color-button-text: 255,255,255; }
+    .header .cart-count, cart-count { background-color: ${S.accent} !important; color: #000 !important; }
+    .announcement-bar.color-scheme-inverse { background-color: ${S.primary} !important; color: #fff !important; }
+    .header__logo { max-width: 100% !important; width: 100%; min-width: 0; overflow: hidden; gap: 10px; }
+    .header__top { column-gap: 12px !important; }
+    .header__search, .header__search .search__form { min-width: 0 !important; max-width: 100% !important; }
+    @media (min-width: 1024px) {
+      .header__logo { width: auto; max-width: none !important; overflow: visible; }
+      .header__top--logo-left { grid-template-columns: auto minmax(0, 1fr) auto !important; column-gap: 20px !important; }
+      .header__top--logo-left .header__search { padding-inline: 16px !important; justify-self: center; width: 100%; max-width: 56rem; }
+    }
+    .mv-footer-logo-wrap { width: auto !important; max-width: 100%; }
+    .mv-brand-logo { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; min-width: 0; text-decoration: none; color: inherit; font-family: Poppins, sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+    .mv-brand-mark { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; background: ${S.primary}; color: ${S.accent}; font-size: 15px; font-weight: 800; flex-shrink: 0; }
+    .mv-brand-text { font-size: clamp(13.5px, 2.2vw, 18px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .footer .mv-brand-mark { width: 36px; height: 36px; background: ${S.accent}; color: ${S.primary}; }
+    .footer .mv-brand-text { color: #fff; font-size: 19px; white-space: normal; overflow: visible; }
+    .mv-fab { background: ${S.primary}; }
+    .mv-fab .mv-chk { background: ${S.accent}; border-color: ${S.accent}; color: #000; }
+  `;
+  document.head.appendChild(st);
+
+  // Client-side cart & search shim for static GitHub Pages
+  let catalogPromise = null;
+  const loadCatalog = () => (catalogPromise ||= fetch(BASE + '/catalog.json').then(r => r.json()).catch(() => []));
+  const cartKey = () => 'mv_gh_cart_' + S.slug;
+  const getCart = () => { try { return JSON.parse(localStorage.getItem(cartKey()) || '[]'); } catch { return []; } };
+  const saveCart = items => localStorage.setItem(cartKey(), JSON.stringify(items));
+
+  async function buildCartState() {
+    const raw = getCart();
+    const cat = await loadCatalog();
+    let totalIdr = 0, count = 0;
+    const items = raw.map((it, idx) => {
+      const prod = cat.find(p => p.variants?.some(v => String(v.shopify_variant_id) === String(it.id))) || cat[0];
+      const vr = prod?.variants?.find(v => String(v.shopify_variant_id) === String(it.id)) || prod?.variants?.[0];
+      const priceIdr = Math.max(5000, Math.round(((Number(vr?.price_cents) || 999) / 100) * 15000 / 500) * 500);
+      const lineIdr = priceIdr * it.qty;
+      totalIdr += lineIdr; count += it.qty;
+      return {
+        id: it.id, key: it.id + ':' + (idx + 1), product_title: prod?.title || 'Product',
+        variant_title: vr?.title !== 'Default Title' ? vr?.title : '', quantity: it.qty,
+        price_idr: priceIdr, line_price_idr: lineIdr,
+        image: BASE + (prod?.image || '/cdn/shop/files/trove-logo.jpg'),
+        url: BASE + '/products/' + (prod?.handle || '')
+      };
+    });
+    return { item_count: count, total_price_idr: totalIdr, items };
+  }
+
+  function renderDrawer(state) {
+    const html = `
+      <div id="CartDrawer-sections--19692154126565__cart-drawer">
+        <div class="${state.item_count > 0 ? 'hidden' : ''} text-center py-8"><p class="h4 mb-2">Your cart is currently empty.</p></div>
+        <div class="${state.item_count === 0 ? 'hidden' : ''} flex flex-col gap-2">
+          ${state.items.map((it, i) => `
+            <div class="cart-item flex gap-3 py-4 border-b">
+              <img src="${esc(it.image)}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:8px">
+              <div style="flex:1">
+                <div style="font-weight:600;font-size:13.5px">${esc(it.product_title)}</div>
+                <div style="font-size:12.5px;opacity:.75">${it.quantity} × ${esc(money(it.price_idr))} = <strong>${esc(money(it.line_price_idr))}</strong></div>
+              </div>
+            </div>`).join('')}
+        </div>
+        <div class="${state.item_count === 0 ? 'hidden' : ''} pt-4 border-t">
+          <div class="flex justify-between items-center mb-3"><span>Subtotal</span><strong>${esc(money(state.total_price_idr))}</strong></div>
+          <button type="button" class="btn btn--primary w-full" data-mv-checkout>Checkout (${state.item_count})</button>
+        </div>
+      </div>`;
+    return { 'sections--19692154126565__cart-drawer': html };
+  }
+
+  const origFetch = window.fetch.bind(window);
+  window.fetch = async (input, init = {}) => {
+    const urlStr = typeof input === 'string' ? input : input.url || '';
+    const u = new URL(urlStr, location.origin);
+    const p = u.pathname.replace(BASE, '');
+    if (p === '/cart.js' || p === '/cart.json') {
+      return new Response(JSON.stringify(await buildCartState()), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }
+    if (p === '/cart/add' || p === '/cart/add.js') {
+      const body = init.body instanceof FormData ? Object.fromEntries(init.body.entries()) : JSON.parse(init.body || '{}');
+      const reqs = Array.isArray(body.items) ? body.items : [{ id: body.id, quantity: body.quantity || 1 }];
+      const cur = getCart();
+      for (const r of reqs) {
+        const hit = cur.find(x => String(x.id) === String(r.id));
+        if (hit) hit.qty += Math.max(1, Number(r.quantity || 1));
+        else cur.push({ id: r.id, qty: Math.max(1, Number(r.quantity || 1)) });
+      }
+      saveCart(cur);
+      const stData = await buildCartState();
+      return new Response(JSON.stringify({ ...stData, sections: renderDrawer(stData) }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }
+    if (p === '/cart/clear.js') {
+      saveCart([]);
+      return new Response(JSON.stringify(await buildCartState()), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }
+    if (p === '/search/suggest') {
+      const q = (u.searchParams.get('q') || '').trim().toLowerCase();
+      const cat = await loadCatalog();
+      const hits = q ? cat.filter(x => x.title.toLowerCase().includes(q) || (x.category || '').toLowerCase().includes(q)).slice(0, 8) : [];
+      const cards = hits.map(x => `<a href="${BASE}/products/${esc(x.handle)}" style="display:flex;align-items:center;gap:12px;padding:8px;border-bottom:1px solid #eee;text-decoration:none;color:inherit"><img src="${BASE}${esc(x.image)}" style="width:44px;height:44px;object-fit:cover;border-radius:6px"><div><div style="font-weight:600;font-size:13px">${esc(x.title)}</div><div style="font-size:12px;opacity:.7">${esc(x.category)}</div></div></a>`).join('');
+      return new Response(`<!DOCTYPE html><html><body><div id="PredictiveSearchResults-sections--19692152914149__header"><div data-total-results="${hits.length}" style="padding:12px">${cards || 'No products found.'}</div></div></body></html>`, { status: 200, headers: { 'Content-Type': 'text/html' } });
+    }
+    return origFetch(input, init);
+  };
+
+  function rebrandDom() {
+    document.title = S.name + ' — Storefront';
+    document.querySelectorAll('.announcement-bar__text, .announcement-bar__message p').forEach(el => { el.textContent = S.announcement; });
+    const hLogo = document.querySelector('a.header__logo--image');
+    if (hLogo) {
+      hLogo.className = 'h3 relative flex header__logo--text mv-brand-logo';
+      hLogo.innerHTML = `<span class="mv-brand-mark">${S.ini}</span><span class="mv-brand-text">${esc(S.name)}</span>`;
+    }
+    const fWrap = document.querySelector('.footer-image-box__image');
+    if (fWrap) {
+      fWrap.classList.add('mv-footer-logo-wrap');
+      fWrap.innerHTML = `<span class="mv-brand-logo"><span class="mv-brand-mark">${S.ini}</span><span class="mv-brand-text">${esc(S.name)}</span></span>`;
+    }
+    const copy = document.querySelector('.footer__copyright-content');
+    if (copy) copy.innerHTML = `&copy; 2026 <a class="link-underline" href="${BASE}/">${esc(S.name)}</a>.`;
+  }
+
+  async function refreshBadge() {
+    const stData = await buildCartState();
+    const el = document.getElementById('mv-fab-cnt');
+    if (el) el.textContent = String(stData.item_count);
+    document.querySelectorAll('cart-count').forEach(cc => { cc.textContent = String(stData.item_count); cc.hidden = stData.item_count === 0; });
+  }
+
+  function mountBar() {
+    if (document.getElementById('mv-fab')) return;
+    const fab = document.createElement('div');
+    fab.id = 'mv-fab';
+    fab.className = 'mv-fab';
+    fab.innerHTML = `
+      <select id="mv-store-sel" aria-label="Switch store">
+        <option value="tukupack" ${S.slug === 'tukupack' ? 'selected' : ''}>TukuPack</option>
+        <option value="anekafood" ${S.slug === 'anekafood' ? 'selected' : ''}>Anekafood Packaging</option>
+      </select>
+      <button type="button" class="mv-chk" id="mv-open-chk">Checkout (<span id="mv-fab-cnt">0</span>)</button>
+      <a href="${BASE}/preview.html">Preview</a>
+    `;
+    document.body.appendChild(fab);
+    document.getElementById('mv-store-sel').onchange = e => {
+      const u = new URL(location.href);
+      u.searchParams.set('store', e.target.value);
+      location.href = u.toString();
+    };
+    document.getElementById('mv-open-chk').onclick = openCheckout;
+  }
+
+  async function openCheckout() {
+    let back = document.getElementById('mv-modal-backdrop');
+    if (!back) {
+      back = document.createElement('div');
+      back.id = 'mv-modal-backdrop';
+      back.className = 'mv-modal-backdrop';
+      back.innerHTML = `<div class="mv-modal"><div class="mv-modal-head"><strong>${esc(S.name)} — Demo Checkout</strong><button type="button" id="mv-close-modal" aria-label="Close" style="border:1px solid #ddd;background:#fff;border-radius:999px;min-width:44px;min-height:44px;cursor:pointer;font-size:16px">✕</button></div><div class="mv-modal-body" id="mv-modal-body"></div></div>`;
+      document.body.appendChild(back);
+      document.getElementById('mv-close-modal').onclick = () => { back.hidden = true; };
+    }
+    back.hidden = false;
+    const body = document.getElementById('mv-modal-body');
+    const stData = await buildCartState();
+    if (!stData.items.length) {
+      body.innerHTML = '<div class="mv-alert mv-alert-err">Your cart is empty. Add any product from the storefront first.</div>';
+      return;
+    }
+    body.innerHTML = `
+      <div class="mv-quote-box">
+        ${stData.items.map(i => `<div class="mv-row"><span>${i.quantity}× ${esc(i.product_title)}</span><strong>${esc(money(i.line_price_idr))}</strong></div>`).join('')}
+        <hr style="border:0;border-top:1px solid #ddd;margin:8px 0">
+        <div class="mv-row" style="font-size:16px;font-weight:700"><span>Total</span><span>${esc(money(stData.total_price_idr))}</span></div>
+      </div>
+      <div class="mv-grid-2">
+        <div class="mv-field"><label>Customer Name</label><input id="mv-name" value="Budi Santoso"></div>
+        <div class="mv-field"><label>WhatsApp</label><input id="mv-phone" value="081234567890"></div>
+      </div>
+      <button type="button" class="mv-btn-primary" id="mv-place">Place Demo Order</button>
+    `;
+    document.getElementById('mv-place').onclick = () => {
+      saveCart([]);
+      refreshBadge();
+      body.innerHTML = '<div class="mv-alert mv-alert-ok">Demo order placed for <strong>' + esc(S.name) + '</strong>! (Static GitHub Pages demo)</div>';
+    };
+  }
+
+  document.addEventListener('click', e => {
+    if (e.target.closest('[data-mv-checkout], button[name="checkout"], a[href*="/checkout"]')) {
+      e.preventDefault();
+      openCheckout();
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    rebrandDom();
+    mountBar();
+    refreshBadge();
+  });
+})();

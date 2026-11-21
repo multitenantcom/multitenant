@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["/cdn/shop/t/3/assets/section-press.css"],
+  "sourcesContent": [".press-thumbs {\n  margin-top: var(--thumbs-spacing, 3.2rem);\n}\n.press-thumbs .swiper {\n  width: 100%;\n  max-width: calc(var(--item-count) * var(--item-width) + (var(--item-count) - 1) * var(--f-column-gap));\n}\n.press-thumbs .swiper-slide .media-wrapper {\n  transition: 0.3s all;\n  cursor: pointer;\n}\n.press-thumbs .swiper-slide:not(.swiper-slide-thumb-active) .media-wrapper {\n  opacity: 0.4;\n}\n\n@media (min-width: 768px) {\n  .press-testimonials {\n    max-width: 81rem;\n    margin: 0 auto;\n  }\n  .press-thumbs .swiper-slide {\n    width: var(--item-width);\n  }\n}\n@media (max-width: 767.98px) {\n  .press-thumbs {\n    display: block;\n    --thumbs-spacing: 2.4rem;\n  }\n  .press-thumbs .swiper-slide {\n    width: var(--item-width-mobile);\n    max-width: 90vw;\n  }\n}\n"],
+  "mappings": "AAAA,CAAC,aACC,WAAY,IAAI,gBAAgB,EAAE,OACpC,CACA,CAHC,aAGa,CAAC,OACb,MAAO,KACP,UAAW,KAAK,IAAI,cAAc,EAAE,IAAI,cAAc,EAAE,CAAC,IAAI,cAAc,EAAE,GAAG,EAAE,IAAI,gBACxF,CACA,CAPC,aAOa,CAAC,aAAa,CAAC,cAC3B,WAAY,IAAK,IACjB,OAAQ,OACV,CACA,CAXC,aAWa,CAJC,YAIY,KAAK,CAAC,2BAA2B,CAJ/B,cAK3B,QAAS,EACX,CAEA,OAAO,UAAY,OACjB,CAAC,mBACC,UAAW,MAjBf,OAkBY,EAAE,IACZ,CACA,CApBD,aAoBe,CAbD,aAcX,MAAO,IAAI,aACb,CACF,CACA,OAAO,UAAY,UACjB,CAzBD,aA0BG,QAAS,MACT,kBAAkB,MACpB,CACA,CA7BD,aA6Be,CAtBD,aAuBX,MAAO,IAAI,qBACX,UAAW,IACb,CACF",
+  "names": []
+}
