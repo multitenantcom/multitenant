@@ -16,7 +16,7 @@
   }
 
   function mountFab() {
-    if (document.getElementById('mv-fab')) return;
+    if (!ctx.store_switcher || document.getElementById('mv-fab')) return;
     const fab = document.createElement('div');
     fab.id = 'mv-fab';
     fab.className = 'mv-fab';

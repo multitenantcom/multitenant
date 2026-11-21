@@ -45,6 +45,11 @@ const STATIC_JS = `(() => {
     }
   };
 
+  const qSuper = new URLSearchParams(location.search).get('super');
+  if (qSuper === '1') localStorage.setItem('mv_super_switcher', '1');
+  else if (qSuper === '0') localStorage.removeItem('mv_super_switcher');
+  const superSwitcherOn = localStorage.getItem('mv_super_switcher') === '1';
+
   const qStore = new URLSearchParams(location.search).get('store');
   if (qStore && STORES[qStore.toLowerCase()]) localStorage.setItem('mv_gh_store', qStore.toLowerCase());
   const slug = STORES[localStorage.getItem('mv_gh_store')] ? localStorage.getItem('mv_gh_store') : 'tukupack';
@@ -317,7 +322,7 @@ const STATIC_JS = `(() => {
   }
 
   function mountBar() {
-    if (document.getElementById('mv-fab')) return;
+    if (!superSwitcherOn || document.getElementById('mv-fab')) return;
     const fab = document.createElement('div');
     fab.id = 'mv-fab';
     fab.className = 'mv-fab';

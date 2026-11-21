@@ -516,6 +516,7 @@ async function injectBridge(html, tenant) {
   const ctxJson = JSON.stringify({
     tenant: { slug: tenant.slug, name: tenant.name, theme: tenant.theme || {}, settings: tenant.settings || {} },
     stores: allTenants,
+    store_switcher: Boolean(app.getPlatformSettings().store_switcher),
     warehouses: whs.map(w => ({ id: w.id, name: w.name, address: w.address, lat: w.lat, lng: w.lng }))
   }).replace(/<\/script/gi, '<\\/script');
 

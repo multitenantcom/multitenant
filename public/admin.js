@@ -551,13 +551,18 @@
     return tab === 'themes' ? superThemes(themes) : superStores();
   }
   async function superStores() {
-    const { tenants } = await call('GET', '/api/super/tenants');
+    const [{ tenants }, settings] = await Promise.all([call('GET', '/api/super/tenants'), call('GET', '/api/super/settings').catch(() => ({ store_switcher: false }))]);
     const pend = tenants.filter(t => t.status === 'pending').length;
-    view(`<div class="head"><div><h2>Stores</h2><p class="muted">${pend ? `${pend} waiting for approval` : 'No stores waiting'}.</p></div></div>
+    const swOn = Boolean(settings.store_switcher);
+    view(`<div class="head"><div><h2>Stores</h2><p class="muted">${pend ? `${pend} waiting for approval` : 'No stores waiting'}.</p></div>
+        <button class="btn ${swOn ? '' : 'sec'}" id="toggle-switcher" type="button">Store switcher &amp; preview: ${swOn ? 'ON' : 'OFF'}</button></div>
       ${tenants.length ? `<div class="table-wrap"><table><thead><tr><th>Store</th><th>Address</th><th>Signed up</th><th>Status</th><th></th></tr></thead><tbody>${tenants.sort((a, b) => (a.status === 'pending' ? -1 : 0) - (b.status === 'pending' ? -1 : 0)).map(t => `<tr>
         <td><b>${esc(t.name)}</b></td><td>${esc(t.slug)}</td><td>${new Date(t.created_at).toLocaleDateString()}</td><td><span class="pill ${t.status}">${{ active: 'Open', pending: 'Waiting', suspended: 'Suspended' }[t.status]}</span></td>
         <td style="white-space:nowrap">${t.status !== 'active' ? `<button class="btn" data-a="approve" data-id="${t.id}">Approve</button>` : `<button class="btn bad" data-a="suspend" data-id="${t.id}">Suspend</button>`}
           <button class="btn sec" data-dom="${t.id}">Custom domain</button></td></tr>`).join('')}</tbody></table></div>` : '<div class="empty">No stores yet.</div>'}`);
+    $('#toggle-switcher').onclick = async () => {
+      try { await call('POST', '/api/super/settings', { store_switcher: !swOn }); toast(`Store switcher ${!swOn ? 'enabled' : 'disabled'}`); superView('stores'); } catch (e) { toast(e.message, 'bad'); }
+    };
     $$('[data-a]').forEach(b => (b.onclick = async () => {
       if (b.dataset.a === 'suspend' && !confirm('Suspend this store? Customers can no longer order.')) return;
       busy(b, true, '…'); try { await call('POST', `/api/super/tenants/${b.dataset.id}/${b.dataset.a}`); superView('stores'); } catch (e) { toast(e.message, 'bad'); busy(b, false); }
