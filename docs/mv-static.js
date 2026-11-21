@@ -95,6 +95,22 @@
     return { item_count: count, total_price_idr: totalIdr, items };
   }
 
+  const EXISTING_PRODUCTS = new Set([
+    'almond-strawberry-milk-unsweet-vanilla-96-fl-oz-bottle',
+    'bright-fresh-strawberry-clusters-1-lb',
+    'handcrafted-classic-french-croissants',
+    'premium-beef-short-ribs-bone-in-2-lb',
+    'smooth-buttery-avocado'
+  ]);
+  const EXISTING_COLLECTIONS = new Set([
+    '', 'all', 'beverages', 'bread-cake', 'dairy-egg',
+    'meat-seafood', 'new-arrivals', 'on-sale', 'vegetables-fruits'
+  ]);
+
+  function itemPriceIdr(vr) {
+    return Math.max(5000, Math.round(((Number(vr?.price_cents) || 999) / 100) * 15000 / 500) * 500);
+  }
+
   function renderDrawer(state) {
     const html = `
       <div id="CartDrawer-sections--19692154126565__cart-drawer" class="drawer__content flex flex-col h-full w-full">
@@ -109,8 +125,19 @@
               <div class="cart-item flex gap-3 py-4 border-b" style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #eee;align-items:center">
                 <img src="${esc(it.image)}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:8px;flex-shrink:0">
                 <div style="flex:1;min-width:0">
-                  <div style="font-weight:600;font-size:13.5px;overflow-wrap:anywhere">${esc(it.product_title)}</div>
-                  <div style="font-size:12.5px;opacity:.75">${it.quantity} × ${esc(money(it.price_idr))} = <strong>${esc(money(it.line_price_idr))}</strong></div>
+                  <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+                    <a href="${esc(it.url)}" style="font-weight:600;font-size:13.5px;overflow-wrap:anywhere;text-decoration:none;color:inherit">${esc(it.product_title)}</a>
+                    <button type="button" data-mv-cart-qty data-line="${i + 1}" data-qty="0" aria-label="Remove item" style="border:0;background:none;cursor:pointer;opacity:.6;font-size:14px;padding:2px 6px">✕</button>
+                  </div>
+                  ${it.variant_title ? `<div style="font-size:12px;opacity:.65">${esc(it.variant_title)}</div>` : ''}
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px">
+                    <div style="display:inline-flex;align-items:center;border:1px solid #ddd;border-radius:6px">
+                      <button type="button" data-mv-cart-qty data-line="${i + 1}" data-qty="${Math.max(0, it.quantity - 1)}" aria-label="Decrease quantity" style="border:0;background:none;padding:4px 10px;cursor:pointer;font-size:14px">−</button>
+                      <span style="min-width:24px;text-align:center;font-size:13px;font-weight:600">${it.quantity}</span>
+                      <button type="button" data-mv-cart-qty data-line="${i + 1}" data-qty="${it.quantity + 1}" aria-label="Increase quantity" style="border:0;background:none;padding:4px 10px;cursor:pointer;font-size:14px">+</button>
+                    </div>
+                    <strong style="font-size:13px">${esc(money(it.line_price_idr))}</strong>
+                  </div>
                 </div>
               </div>`).join('')}
           </div>
@@ -151,7 +178,10 @@
       return new Response(JSON.stringify({ ...first, ...stData, sections: renderDrawer(stData) }), { status: 200, headers: { 'Content-Type': 'application/json' } });
     }
     if (p === '/cart/change' || p === '/cart/change.js') {
-      const body = typeof init.body === 'string' ? JSON.parse(init.body || '{}') : {};
+      let body = {};
+      const rawBody = init.body ?? (input instanceof Request ? await input.clone().text().catch(() => '') : '');
+      if (rawBody instanceof FormData) body = Object.fromEntries(rawBody.entries());
+      else if (typeof rawBody === 'string' && rawBody) { try { body = JSON.parse(rawBody); } catch { body = Object.fromEntries(new URLSearchParams(rawBody).entries()); } }
       const cur = getCart();
       const line = Number(body.line);
       const qty = Math.max(0, Math.floor(Number(body.quantity ?? 0)));
@@ -254,39 +284,164 @@
     document.getElementById('mv-open-chk').onclick = openCheckout;
   }
 
-  async function openCheckout() {
+  function openModalShell(title) {
     let back = document.getElementById('mv-modal-backdrop');
     if (!back) {
       back = document.createElement('div');
       back.id = 'mv-modal-backdrop';
       back.className = 'mv-modal-backdrop';
-      back.innerHTML = `<div class="mv-modal"><div class="mv-modal-head"><strong>${esc(S.name)} — Demo Checkout</strong><button type="button" id="mv-close-modal" aria-label="Close" style="border:1px solid #ddd;background:#fff;border-radius:999px;min-width:44px;min-height:44px;cursor:pointer;font-size:16px">✕</button></div><div class="mv-modal-body" id="mv-modal-body"></div></div>`;
+      back.innerHTML = `<div class="mv-modal"><div class="mv-modal-head"><strong id="mv-modal-title"></strong><button type="button" id="mv-close-modal" aria-label="Close" style="border:1px solid #ddd;background:#fff;border-radius:999px;min-width:44px;min-height:44px;cursor:pointer;font-size:16px">✕</button></div><div class="mv-modal-body" id="mv-modal-body"></div></div>`;
       document.body.appendChild(back);
       document.getElementById('mv-close-modal').onclick = () => { back.hidden = true; };
+      back.addEventListener('click', ev => { if (ev.target === back) back.hidden = true; });
     }
+    document.getElementById('mv-modal-title').textContent = title;
     back.hidden = false;
-    const body = document.getElementById('mv-modal-body');
+    return document.getElementById('mv-modal-body');
+  }
+
+  async function openProductModal(handle) {
+    const body = openModalShell(S.name + ' — Product');
+    body.innerHTML = '<div style="padding:20px;text-align:center">Loading product...</div>';
+    const cat = await loadCatalog();
+    const prod = cat.find(x => x.handle === handle) || cat[0];
+    if (!prod) { body.innerHTML = '<div class="mv-alert mv-alert-err">Product not found.</div>'; return; }
+    const vars = prod.variants || [];
+    const first = vars[0];
+    const priceIdr = itemPriceIdr(first);
+    const opts = vars.map(v => `<option value="${esc(v.shopify_variant_id)}">${esc(v.title === 'Default Title' ? 'Standard' : v.title)} — ${esc(money(itemPriceIdr(v)))}</option>`).join('');
+    body.innerHTML = `
+      <div style="display:grid;gap:16px">
+        <div style="border-radius:12px;overflow:hidden;background:#f5f5f5;aspect-ratio:16/10;max-height:260px">
+          <img src="${BASE}${esc(prod.image || '')}" alt="${esc(prod.title)}" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <div>
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;opacity:.65">${esc(S.name)} · ${esc(prod.category || 'Catalog')}</div>
+          <h3 style="margin:4px 0 8px;font-size:20px;font-weight:700">${esc(prod.title)}</h3>
+          <div style="font-size:18px;font-weight:700;color:${S.primary};margin-bottom:8px">${esc(money(priceIdr))}</div>
+          <p style="font-size:13.5px;opacity:.8;margin-bottom:14px">${esc(prod.description || prod.title)}</p>
+          <form method="post" action="${BASE}/cart/add" data-type="add-to-cart-form" style="display:flex;flex-direction:column;gap:10px">
+            ${vars.length > 1 ? `<select name="id" class="form-control form-control--select">${opts}</select>` : `<input type="hidden" name="id" value="${esc(first?.shopify_variant_id || '')}">`}
+            <div style="display:flex;gap:8px;align-items:center">
+              <input type="number" name="quantity" value="1" min="1" class="form-control" style="width:84px">
+              <button type="submit" name="add" class="mv-btn-primary" style="flex:1">Add to cart</button>
+            </div>
+          </form>
+        </div>
+      </div>`;
+  }
+
+  function renderCatalogGrid(items, emptyMsg) {
+    if (!items.length) return `<div class="mv-alert mv-alert-err">${esc(emptyMsg)}</div>`;
+    return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:12px">
+      ${items.map(p => {
+        const vr = p.variants?.[0];
+        const price = itemPriceIdr(vr);
+        return `<div style="border:1px solid #eee;border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;background:#fff">
+          <a href="${BASE}/products/${esc(p.handle)}" style="display:block;aspect-ratio:1/1;border-radius:8px;overflow:hidden;background:#f5f5f5">
+            <img src="${BASE}${esc(p.image || '')}" alt="${esc(p.title)}" style="width:100%;height:100%;object-fit:cover">
+          </a>
+          <div style="font-size:11px;opacity:.65">${esc(p.category || '')}</div>
+          <a href="${BASE}/products/${esc(p.handle)}" style="font-weight:600;font-size:13px;line-height:1.3;text-decoration:none;color:inherit;flex:1">${esc(p.title)}</a>
+          <div style="font-weight:700;font-size:13.5px;color:${S.primary}">${esc(money(price))}</div>
+          <form method="post" action="${BASE}/cart/add" style="margin:0">
+            <input type="hidden" name="id" value="${esc(vr?.shopify_variant_id || '')}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="mv-btn-primary" style="width:100%;padding:8px;font-size:12.5px">Add to cart</button>
+          </form>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }
+
+  async function openCollectionModal(colSlug) {
+    const label = colSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    const body = openModalShell(`${S.name} — ${label}`);
+    body.innerHTML = '<div style="padding:20px;text-align:center">Loading collection...</div>';
+    const cat = await loadCatalog();
+    const terms = colSlug.toLowerCase().split('-').filter(w => w.length > 2 && w !== 'new');
+    let hits = cat.filter(p => {
+      const hay = `${p.title} ${p.category || ''} ${p.description || ''}`.toLowerCase();
+      return terms.some(t => hay.includes(t.replace(/s$/, '')));
+    });
+    if (!hits.length) hits = cat.slice(0, 12);
+    body.innerHTML = `<div style="font-size:12.5px;opacity:.7;margin-bottom:10px">Showing ${hits.length} items for <strong>${esc(label)}</strong></div>` + renderCatalogGrid(hits, 'No products in this collection.');
+  }
+
+  async function openSearchModal(query) {
+    const q = (query || '').trim();
+    const body = openModalShell(`Search: "${q || 'All products'}"`);
+    body.innerHTML = '<div style="padding:20px;text-align:center">Searching...</div>';
+    const cat = await loadCatalog();
+    const ql = q.toLowerCase();
+    const hits = ql ? cat.filter(p => `${p.title} ${p.category || ''} ${p.description || ''}`.toLowerCase().includes(ql)) : cat.slice(0, 16);
+    body.innerHTML = `
+      <form data-mv-search-inline style="display:flex;gap:8px;margin-bottom:14px">
+        <input type="search" value="${esc(q)}" placeholder="Search products..." class="form-control" style="flex:1;padding:8px 12px;border:1px solid #ddd;border-radius:8px">
+        <button type="submit" class="mv-btn-primary">Search</button>
+      </form>
+      ${renderCatalogGrid(hits.slice(0, 24), 'No products matched "' + q + '".')}`;
+    body.querySelector('[data-mv-search-inline]').onsubmit = ev => {
+      ev.preventDefault();
+      openSearchModal(ev.target.querySelector('input').value);
+    };
+  }
+
+  function openPolicyModal(policyPath) {
+    const isPrivacy = policyPath.includes('privacy');
+    const body = openModalShell(S.name + ' — ' + (isPrivacy ? 'Privacy Policy' : 'Terms of Service'));
+    body.innerHTML = isPrivacy
+      ? `<p><strong>${esc(S.name)}</strong> stores cart items locally in your browser (<code>localStorage</code>) for this interactive GitHub Pages demo. No personal payment details are transmitted.</p>`
+      : `<p>Welcome to <strong>${esc(S.name)}</strong>. Prices shown are in IDR (Rp). Demo orders placed on GitHub Pages are simulated locally; connect the Netlify + Supabase backend for live order processing.</p>`;
+  }
+
+  async function openCheckout() {
+    const body = openModalShell(`${S.name} — Demo Checkout`);
     const stData = await buildCartState();
     if (!stData.items.length) {
       body.innerHTML = '<div class="mv-alert mv-alert-err">Your cart is empty. Add any product from the storefront first.</div>';
       return;
     }
+    let shipFee = 0;
+    let discount = 0;
+    const renderCheckout = () => {
+      const coupon = (document.getElementById('mv-coupon')?.value || '').trim().toUpperCase();
+      discount = coupon === 'WELCOME10' ? Math.round(stData.total_price_idr * 0.1) : coupon === 'FIVEK' ? Math.min(5000, stData.total_price_idr) : 0;
+      const grand = Math.max(0, stData.total_price_idr - discount + shipFee);
+      const qBox = document.getElementById('mv-chk-summary');
+      if (qBox) {
+        qBox.innerHTML = `
+          ${stData.items.map(i => `<div class="mv-row"><span>${i.quantity}× ${esc(i.product_title)}</span><strong>${esc(money(i.line_price_idr))}</strong></div>`).join('')}
+          <hr style="border:0;border-top:1px solid #ddd;margin:8px 0">
+          <div class="mv-row"><span>Subtotal</span><span>${esc(money(stData.total_price_idr))}</span></div>
+          ${discount ? `<div class="mv-row" style="color:#15803d"><span>Coupon (${esc(coupon)})</span><span>-${esc(money(discount))}</span></div>` : ''}
+          <div class="mv-row"><span>Shipping</span><span>${shipFee ? esc(money(shipFee)) : 'Free (Pickup)'}</span></div>
+          <div class="mv-row" style="font-size:16px;font-weight:700;margin-top:4px"><span>Total</span><span>${esc(money(grand))}</span></div>`;
+      }
+    };
     body.innerHTML = `
-      <div class="mv-quote-box">
-        ${stData.items.map(i => `<div class="mv-row"><span>${i.quantity}× ${esc(i.product_title)}</span><strong>${esc(money(i.line_price_idr))}</strong></div>`).join('')}
-        <hr style="border:0;border-top:1px solid #ddd;margin:8px 0">
-        <div class="mv-row" style="font-size:16px;font-weight:700"><span>Total</span><span>${esc(money(stData.total_price_idr))}</span></div>
-      </div>
+      <div class="mv-quote-box" id="mv-chk-summary"></div>
       <div class="mv-grid-2">
         <div class="mv-field"><label>Customer Name</label><input id="mv-name" value="Budi Santoso"></div>
         <div class="mv-field"><label>WhatsApp</label><input id="mv-phone" value="081234567890"></div>
       </div>
+      <div class="mv-field"><label>Delivery Address</label><input id="mv-addr" value="Jl. Kemang Raya No. 20, Jakarta Selatan"></div>
+      <div class="mv-grid-2">
+        <div class="mv-field"><label>Delivery Method</label>
+          <select id="mv-ship"><option value="0">Store Pickup (Free)</option><option value="12000">Store Courier (Rp 12.000)</option></select>
+        </div>
+        <div class="mv-field"><label>Coupon Code</label><input id="mv-coupon" placeholder="Try WELCOME10 or FIVEK"></div>
+      </div>
       <button type="button" class="mv-btn-primary" id="mv-place">Place Demo Order</button>
     `;
+    renderCheckout();
+    document.getElementById('mv-ship').onchange = e => { shipFee = Number(e.target.value || 0); renderCheckout(); };
+    document.getElementById('mv-coupon').oninput = renderCheckout;
     document.getElementById('mv-place').onclick = () => {
+      const ordNo = 'ORD-' + Math.random().toString(36).slice(2, 8).toUpperCase();
       saveCart([]);
       refreshBadge();
-      body.innerHTML = '<div class="mv-alert mv-alert-ok">Demo order placed for <strong>' + esc(S.name) + '</strong>! (Static GitHub Pages demo)</div>';
+      body.innerHTML = `<div class="mv-alert mv-alert-ok">Demo order <strong>${ordNo}</strong> placed for <strong>${esc(S.name)}</strong>! (Static GitHub Pages demo)</div>`;
     };
   }
 
@@ -317,37 +472,119 @@
     }
   }
 
-  // Intercept ALL /cart/add form submits in capture phase so static GitHub Pages always adds & opens Cart Drawer
+  // Intercept ALL form submits (/cart/add, /search, /contact, /localization, /cart) so static GitHub Pages never 404/405s
   document.addEventListener('submit', async e => {
     const form = e.target;
     if (!(form instanceof HTMLFormElement)) return;
     const act = form.getAttribute('action') || '';
-    if (!act.includes('/cart/add')) return;
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    const fd = new FormData(form);
-    const r = await fetch(BASE + '/cart/add.js', { method: 'POST', body: fd });
-    const data = await r.json();
-    const qv = form.closest('quick-view-modal');
-    if (qv) {
-      if (qv.hide) qv.hide();
-      qv.removeAttribute('open');
-      qv.setAttribute('hidden', '');
+    if (act.includes('/cart/add')) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      const fd = new FormData(form);
+      const r = await fetch(BASE + '/cart/add.js', { method: 'POST', body: fd });
+      const data = await r.json();
+      const qv = form.closest('quick-view-modal');
+      if (qv) {
+        if (qv.hide) qv.hide();
+        qv.removeAttribute('open');
+        qv.setAttribute('hidden', '');
+      }
+      openCartDrawer(data);
+      showToast('Added to cart (' + (data.item_count || 1) + ')');
+      return;
     }
-    openCartDrawer(data);
-    showToast('Added to cart (' + (data.item_count || 1) + ')');
+    if (act === '/search' || act === BASE + '/search') {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      const q = form.querySelector('input[name="q"]')?.value || '';
+      openSearchModal(q);
+      return;
+    }
+    if (act.startsWith('/contact') || act.startsWith(BASE + '/contact')) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      const email = form.querySelector('input[type="email"]')?.value?.trim() || '';
+      if (email) {
+        const subs = JSON.parse(localStorage.getItem('mv_gh_subs') || '[]');
+        if (!subs.includes(email)) subs.push(email);
+        localStorage.setItem('mv_gh_subs', JSON.stringify(subs));
+      }
+      form.reset();
+      showToast('Subscribed to ' + S.name + ' updates!');
+      return;
+    }
+    if (act === '/localization' || act === BASE + '/localization') {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      showToast('Currency: IDR (Rp)');
+      return;
+    }
+    if (act === '/cart' || act === BASE + '/cart') {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      openCheckout();
+    }
   }, true);
 
-  document.addEventListener('click', e => {
+  document.addEventListener('click', async e => {
+    const qtyBtn = e.target.closest('[data-mv-cart-qty]');
+    if (qtyBtn) {
+      e.preventDefault();
+      const line = Number(qtyBtn.dataset.line);
+      const qty = Number(qtyBtn.dataset.qty);
+      const r = await fetch(BASE + '/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ line, quantity: qty })
+      });
+      const data = await r.json();
+      openCartDrawer(data);
+      return;
+    }
     if (e.target.closest('[data-mv-checkout], button[name="checkout"], a[href*="/checkout"]')) {
       e.preventDefault();
       openCheckout();
+      return;
+    }
+    const link = e.target.closest('a[href]');
+    if (!link) return;
+    const rawHref = link.getAttribute('href') || '';
+    if (rawHref === '#' && !link.hasAttribute('aria-controls') && !link.hasAttribute('data-drawer-trigger')) {
+      e.preventDefault();
+      return;
+    }
+    if (rawHref.startsWith('http') || rawHref.startsWith('mailto:') || rawHref.startsWith('tel:') || rawHref.startsWith('#')) return;
+    const u = new URL(link.href, location.origin);
+    const p = u.pathname.replace(BASE, '');
+    if (p === '/search') {
+      e.preventDefault();
+      openSearchModal(u.searchParams.get('q') || '');
+      return;
+    }
+    if (p.startsWith('/policies/')) {
+      e.preventDefault();
+      openPolicyModal(p);
+      return;
+    }
+    const prodMatch = p.match(/^\/products\/([^/]+?)\/?$/);
+    if (prodMatch && !EXISTING_PRODUCTS.has(prodMatch[1])) {
+      e.preventDefault();
+      openProductModal(prodMatch[1]);
+      return;
+    }
+    const colMatch = p.match(/^\/collections\/([^/]+?)\/?$/);
+    if (colMatch && !EXISTING_COLLECTIONS.has(colMatch[1])) {
+      e.preventDefault();
+      openCollectionModal(colMatch[1]);
     }
   });
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
     rebrandDom();
     mountBar();
     refreshBadge();
+    const stData = await buildCartState();
+    const target = document.querySelector('#CartDrawer-sections--19692154126565__cart-drawer');
+    if (target) target.outerHTML = renderDrawer(stData)['sections--19692154126565__cart-drawer'];
   });
 })();
