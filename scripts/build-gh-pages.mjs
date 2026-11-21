@@ -200,8 +200,13 @@ const STATIC_JS = `(() => {
       saveCart(cur);
       const stData = await buildCartState();
       refreshBadge();
+      const target = document.querySelector('#CartDrawer-sections--19692154126565__cart-drawer');
+      const drawerHtml = renderDrawer(stData);
+      if (target && drawerHtml['sections--19692154126565__cart-drawer']) {
+        target.outerHTML = drawerHtml['sections--19692154126565__cart-drawer'];
+      }
       const first = stData.items[0] || {};
-      return new Response(JSON.stringify({ ...first, ...stData, sections: renderDrawer(stData) }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      return new Response(JSON.stringify({ ...first, ...stData, sections: drawerHtml }), { status: 200, headers: { 'Content-Type': 'application/json' } });
     }
     if (p === '/cart/change' || p === '/cart/change.js') {
       let body = {};
@@ -253,7 +258,7 @@ const STATIC_JS = `(() => {
       const recHtml = \`<!DOCTYPE html><html><body><div class="shopify-section"><product-recommendations><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px">\${cards}</div></product-recommendations></div></body></html>\`;
       return new Response(recHtml, { status: 200, headers: { 'Content-Type': 'text/html' } });
     }
-    if (qvMatch && u.searchParams.has('section_id')) {
+    if (qvMatch && u.searchParams.get('section_id')?.includes('quick-view')) {
       const cat = await loadCatalog();
       const prod = cat.find(x => x.handle === qvMatch[1]) || cat[0];
       const vars = prod?.variants || [];
@@ -527,6 +532,7 @@ const STATIC_JS = `(() => {
     if (!(form instanceof HTMLFormElement)) return;
     const act = form.getAttribute('action') || '';
     if (act.includes('/cart/add')) {
+      if (form.getAttribute('is') === 'product-bundle-selection') return;
       e.preventDefault();
       e.stopImmediatePropagation();
       const fd = new FormData(form);
@@ -575,7 +581,29 @@ const STATIC_JS = `(() => {
     }
   }, true);
 
+  function closeCartDrawer() {
+    const drawer = document.getElementById('CartDrawer');
+    if (!drawer) return;
+    if (typeof drawer.hide === 'function') {
+      try { drawer.hide(); } catch {}
+    }
+    drawer.removeAttribute('open');
+    drawer.setAttribute('hidden', '');
+    document.body.classList.remove('overflow-hidden');
+    document.documentElement.classList.remove('overflow-hidden');
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeCartDrawer();
+  });
+
   document.addEventListener('click', async e => {
+    if (e.target.closest('#CartDrawer .drawer__close-btn, #CartDrawer .fixed-overlay, [aria-controls="CartDrawer"].drawer__close-btn')) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeCartDrawer();
+      return;
+    }
     const qtyBtn = e.target.closest('[data-mv-cart-qty]');
     if (qtyBtn) {
       e.preventDefault();
