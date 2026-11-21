@@ -128,11 +128,21 @@ const STATIC_JS = `(() => {
   }
 
   function renderDrawer(state) {
+    const freeGoal = 250000;
+    const pct = Math.min(100, Math.round((state.total_price_idr / freeGoal) * 100));
+    const rem = Math.max(0, freeGoal - state.total_price_idr);
+    const goalText = rem === 0
+      ? '🎉 You unlocked <strong>Free Express Delivery</strong>!'
+      : \`Add <strong>\${esc(money(rem))}</strong> more for <strong>Free Express Delivery</strong>\`;
     const html = \`
       <div id="CartDrawer-sections--19692154126565__cart-drawer" class="drawer__content flex flex-col h-full w-full">
         <div class="drawer__header" style="padding:14px 16px;border-bottom:1px solid #e5e5e5;display:flex;align-items:center;justify-content:space-between;gap:12px">
           <h2 id="CartDrawer-Heading" class="drawer__heading h4" style="margin:0">Your cart (\${state.item_count})</h2>
           <button class="drawer__close-btn" aria-controls="CartDrawer" aria-label="Close" type="button" style="position:static;min-width:44px;min-height:44px;display:grid;place-items:center">✕</button>
+        </div>
+        <div style="padding:10px 16px;background:#f8fafc;border-bottom:1px solid #eee;font-size:12.5px">
+          <div style="margin-bottom:6px">\${goalText}</div>
+          <div style="height:6px;background:#e2e8f0;border-radius:999px;overflow:hidden"><div style="height:100%;width:\${pct}%;background:\${S.primary};transition:width .25s"></div></div>
         </div>
         <div class="drawer__body v-scrollable flex-1" style="padding:16px;overflow-y:auto">
           <div class="\${state.item_count > 0 ? 'hidden' : ''} text-center py-8"><p class="h4 mb-2">Your cart is currently empty.</p></div>
@@ -211,7 +221,13 @@ const STATIC_JS = `(() => {
       return new Response(JSON.stringify({ ...stData, sections: renderDrawer(stData) }), { status: 200, headers: { 'Content-Type': 'application/json' } });
     }
     if (p === '/cart/update' || p === '/cart/update.js') {
+      let body = {};
+      const rawBody = init.body ?? (input instanceof Request ? await input.clone().text().catch(() => '') : '');
+      if (rawBody instanceof FormData) body = Object.fromEntries(rawBody.entries());
+      else if (typeof rawBody === 'string' && rawBody) { try { body = JSON.parse(rawBody); } catch { body = Object.fromEntries(new URLSearchParams(rawBody).entries()); } }
+      if (typeof body.note === 'string') localStorage.setItem('mv_gh_note_' + S.slug, body.note);
       const stData = await buildCartState();
+      stData.note = localStorage.getItem('mv_gh_note_' + S.slug) || '';
       return new Response(JSON.stringify({ ...stData, sections: renderDrawer(stData) }), { status: 200, headers: { 'Content-Type': 'application/json' } });
     }
     if (p === '/cart/clear.js') {
@@ -220,6 +236,23 @@ const STATIC_JS = `(() => {
       return new Response(JSON.stringify(await buildCartState()), { status: 200, headers: { 'Content-Type': 'application/json' } });
     }
     const qvMatch = p.match(/^\\/products\\/([^/.]+?)\\/?$/);
+    if (qvMatch && u.searchParams.get('sections') === 'product-compare-bar-item') {
+      const cat = await loadCatalog();
+      const prod = cat.find(x => x.handle === qvMatch[1]) || cat[0];
+      const itemHtml = \`<div class="shopify-section"><div class="compare-item" data-product-id="\${esc(prod?.shopify_id || '')}"><a href="\${BASE}/products/\${esc(prod?.handle || '')}" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit"><img src="\${BASE}\${esc(prod?.image || '')}" alt="" style="width:40px;height:40px;object-fit:cover;border-radius:6px"><span style="font-size:12px;font-weight:600">\${esc(prod?.title || '')}</span></a></div></div>\`;
+      return new Response(JSON.stringify({ 'product-compare-bar-item': itemHtml }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }
+    if (p.match(/^\\/variants\\/[^/]+\\/?$/) && u.searchParams.get('section_id') === 'pickup-availability') {
+      const pkHtml = \`<!DOCTYPE html><html><body><div class="shopify-section"><pickup-availability-preview class="pickup-availability-preview"><div class="pickup-availability-info"><p class="caption-large">Pickup available at <strong>\${esc(S.name)} Hub</strong></p><p class="pickup-availability-caption">Usually ready in 2 hours</p></div></pickup-availability-preview></div></body></html>\`;
+      return new Response(pkHtml, { status: 200, headers: { 'Content-Type': 'text/html' } });
+    }
+    if (p === '/recommendations/products') {
+      const cat = await loadCatalog();
+      const picks = cat.slice(0, 4);
+      const cards = picks.map(x => \`<div class="product-card" style="border:1px solid #eee;border-radius:10px;padding:10px;background:#fff"><a href="\${BASE}/products/\${esc(x.handle)}" style="display:block;aspect-ratio:1/1;border-radius:8px;overflow:hidden;margin-bottom:8px"><img src="\${BASE}\${esc(x.image)}" alt="\${esc(x.title)}" style="width:100%;height:100%;object-fit:cover"></a><a href="\${BASE}/products/\${esc(x.handle)}" style="font-weight:600;font-size:13px;text-decoration:none;color:inherit;display:block;margin-bottom:4px">\${esc(x.title)}</a><div style="font-weight:700;font-size:13px;color:\${S.primary}">\${esc(money(itemPriceIdr(x.variants?.[0])))}</div></div>\`).join('');
+      const recHtml = \`<!DOCTYPE html><html><body><div class="shopify-section"><product-recommendations><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px">\${cards}</div></product-recommendations></div></body></html>\`;
+      return new Response(recHtml, { status: 200, headers: { 'Content-Type': 'text/html' } });
+    }
     if (qvMatch && u.searchParams.has('section_id')) {
       const cat = await loadCatalog();
       const prod = cat.find(x => x.handle === qvMatch[1]) || cat[0];
@@ -616,6 +649,8 @@ function walk(dir) {
       let html = fs.readFileSync(full, 'utf8');
       html = html
         .replace(/<script[^>]+src="https:\/\/cdn\.shopify\.com\/[^"]+"[^>]*><\/script>/gi, '')
+        .replace(/<script[^>]+src="\/\/cdn\.shopify\.com\/[^"]+"[^>]*><\/script>/gi, '')
+        .replace(/<script[^>]+src="\/checkouts\/internal\/preloads\.js[^"]*"[^>]*><\/script>/gi, '')
         .replace(/<script[^>]*>\s*await import\("https:\/\/cdn\.shopify\.com\/[^"]+"\)[\s\S]*?<\/script>/gi, '')
         .replace(/(href|src|action|data-url|srcset)="\/(cdn|collections|products|pages|blogs|cart)\//g, `$1="${BASE}/$2/`)
         .replace(/url\("\/cdn\//g, `url("${BASE}/cdn/`)
