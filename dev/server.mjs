@@ -564,7 +564,7 @@ http.createServer(async (req, res) => {
   const cookies = [storeCookie, cartCookie].filter(Boolean);
 
   // Shopify-compatible cart & storefront AJAX routes
-  if (req.method === 'GET' && (pathname === '/cart.js' || pathname === '/cart.json')) {
+  if (req.method === 'GET' && (pathname === '/cart.js' || pathname === '/cart.json' || (pathname === '/cart' && String(req.headers.accept || '').includes('application/json')))) {
     return sendJson(res, 200, await buildCartState(tenant, cartToken), cookies);
   }
   if (req.method === 'POST' && (pathname === '/cart/add' || pathname === '/cart/add.js')) {

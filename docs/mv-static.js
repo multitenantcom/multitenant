@@ -122,25 +122,74 @@
     const urlStr = typeof input === 'string' ? input : input.url || '';
     const u = new URL(urlStr, location.origin);
     const p = u.pathname.replace(BASE, '');
-    if (p === '/cart.js' || p === '/cart.json') {
+    if (p === '/cart.js' || p === '/cart.json' || (p === '/cart' && String((init.headers && (init.headers.Accept || init.headers.accept)) || '').includes('json'))) {
       return new Response(JSON.stringify(await buildCartState()), { status: 200, headers: { 'Content-Type': 'application/json' } });
     }
     if (p === '/cart/add' || p === '/cart/add.js') {
-      const body = init.body instanceof FormData ? Object.fromEntries(init.body.entries()) : JSON.parse(init.body || '{}');
+      let body = {};
+      if (init.body instanceof FormData) body = Object.fromEntries(init.body.entries());
+      else if (typeof init.body === 'string') { try { body = JSON.parse(init.body); } catch { body = Object.fromEntries(new URLSearchParams(init.body).entries()); } }
       const reqs = Array.isArray(body.items) ? body.items : [{ id: body.id, quantity: body.quantity || 1 }];
       const cur = getCart();
       for (const r of reqs) {
+        if (!r.id) continue;
         const hit = cur.find(x => String(x.id) === String(r.id));
         if (hit) hit.qty += Math.max(1, Number(r.quantity || 1));
-        else cur.push({ id: r.id, qty: Math.max(1, Number(r.quantity || 1)) });
+        else cur.push({ id: String(r.id), qty: Math.max(1, Number(r.quantity || 1)) });
       }
       saveCart(cur);
+      const stData = await buildCartState();
+      refreshBadge();
+      const first = stData.items[0] || {};
+      return new Response(JSON.stringify({ ...first, ...stData, sections: renderDrawer(stData) }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }
+    if (p === '/cart/change' || p === '/cart/change.js') {
+      const body = typeof init.body === 'string' ? JSON.parse(init.body || '{}') : {};
+      const cur = getCart();
+      const line = Number(body.line);
+      const qty = Math.max(0, Math.floor(Number(body.quantity ?? 0)));
+      if (Number.isFinite(line) && line >= 1 && line <= cur.length) {
+        if (qty === 0) cur.splice(line - 1, 1);
+        else cur[line - 1].qty = qty;
+        saveCart(cur);
+      }
+      const stData = await buildCartState();
+      refreshBadge();
+      return new Response(JSON.stringify({ ...stData, sections: renderDrawer(stData) }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }
+    if (p === '/cart/update' || p === '/cart/update.js') {
       const stData = await buildCartState();
       return new Response(JSON.stringify({ ...stData, sections: renderDrawer(stData) }), { status: 200, headers: { 'Content-Type': 'application/json' } });
     }
     if (p === '/cart/clear.js') {
       saveCart([]);
+      refreshBadge();
       return new Response(JSON.stringify(await buildCartState()), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }
+    const qvMatch = p.match(/^\/products\/([^/.]+?)\/?$/);
+    if (qvMatch && u.searchParams.has('section_id')) {
+      const cat = await loadCatalog();
+      const prod = cat.find(x => x.handle === qvMatch[1]) || cat[0];
+      const vars = prod?.variants || [];
+      const first = vars[0];
+      const priceIdr = Math.max(5000, Math.round(((Number(first?.price_cents) || 999) / 100) * 15000 / 500) * 500);
+      const opts = vars.map(v => {
+        const vp = Math.max(5000, Math.round(((Number(v.price_cents) || 999) / 100) * 15000 / 500) * 500);
+        return `<option value="${esc(v.shopify_variant_id)}">${esc(v.title === 'Default Title' ? 'Standard' : v.title)} — ${esc(money(vp))}</option>`;
+      }).join('');
+      const qvHtml = `<!DOCTYPE html><html><body><div class="shopify-section"><div class="quick-view__content p-4"><div class="flex flex-col gap-4">
+        <div style="border-radius:12px;overflow:hidden;background:#f5f5f5;aspect-ratio:1/1;max-height:280px"><img src="${BASE}${esc(prod?.image || '')}" alt="${esc(prod?.title || '')}" style="width:100%;height:100%;object-fit:cover"></div>
+        <div>
+          <span style="font-size:11px;text-transform:uppercase;color:#666">${esc(S.name)} · ${esc(prod?.category || '')}</span>
+          <h2 class="h3 mt-1 mb-2">${esc(prod?.title || '')}</h2>
+          <div class="text-lg font-bold mb-2">${esc(money(priceIdr))}</div>
+          <p class="text-sm opacity-80 mb-3">${esc(prod?.description || '')}</p>
+          <form method="post" action="${BASE}/cart/add" data-type="add-to-cart-form" class="flex flex-col gap-3">
+            ${vars.length > 1 ? `<select name="id" class="form-control form-control--select">${opts}</select>` : `<input type="hidden" name="id" value="${esc(first?.shopify_variant_id || '')}">`}
+            <div class="flex gap-2 items-center"><input type="number" name="quantity" value="1" min="1" class="form-control" style="width:80px"><button type="submit" name="add" class="btn btn--primary flex-1">Add to cart</button></div>
+          </form>
+        </div></div></div></div></body></html>`;
+      return new Response(qvHtml, { status: 200, headers: { 'Content-Type': 'text/html' } });
     }
     if (p === '/search/suggest') {
       const q = (u.searchParams.get('q') || '').trim().toLowerCase();
