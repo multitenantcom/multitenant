@@ -1,0 +1,261 @@
+<div class="ht-shell tv-cols-{{settings.columns}}">
+  {{#settings.announcement}}
+  <div class="ht-ann">
+    <div class="ht-wrap ht-ann-in">
+      {{#settings.announcement_tag}}<span class="ht-ann-tag">{{settings.announcement_tag}}</span>{{/settings.announcement_tag}}
+      <p>{{settings.announcement}}</p>
+    </div>
+  </div>
+  {{/settings.announcement}}
+
+  <!-- Hyper Trove Header (.color-scheme-2) -->
+  <header class="ht-head">
+    <div class="ht-wrap ht-head-top">
+      <button class="ht-brand" data-action="home">
+        {{#store.logo}}<img src="{{store.logo}}" alt="">{{/store.logo}}{{^store.logo}}<span class="ht-mark" aria-hidden="true">{{store.initial}}</span>{{/store.logo}}
+        <span class="ht-brand-name">{{store.name}}</span>
+      </button>
+
+      <label class="ht-search">
+        <span class="ht-search-scope">All</span>
+        <input type="search" data-action="search" placeholder="Search {{store.name}}..." aria-label="Search products" autocomplete="off" enterkeyhint="search">
+        <span class="ht-search-btn" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </span>
+      </label>
+
+      <nav class="ht-tools" aria-label="Store navigation">
+        {{#can_switch}}<button class="ht-tool" data-action="stores"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Stores</span></button>{{/can_switch}}
+        <button class="ht-tool" data-action="orders"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Account</span></button>
+        <button class="ht-cart" data-action="cart" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 8h14l-1.2 11.1a2 2 0 0 1-2 1.9H8.2a2 2 0 0 1-2-1.9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 8V7a3 3 0 0 1 6 0v1" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <span class="ht-cart-n" data-bind="cart-count">{{cart.count}}</span>
+          <span class="ht-cart-sum" data-bind="cart-total">{{cart.total}}</span>
+        </button>
+      </nav>
+    </div>
+
+    {{#has_categories}}
+    <div class="ht-nav-bar">
+      <nav class="ht-wrap ht-cats" aria-label="Categories">
+        <button class="ht-cat" data-action="all">All Categories</button>
+        {{#categories}}<button class="ht-cat" data-action="category" data-category="{{name}}">{{name}}</button>{{/categories}}
+        <button class="ht-cat" data-action="scroll" data-target="ht-promo-band">Wholesale</button>
+        {{#settings.show_faq}}<button class="ht-cat" data-action="scroll" data-target="ht-faq-band">FAQ</button>{{/settings.show_faq}}
+      </nav>
+    </div>
+    {{/has_categories}}
+  </header>
+
+  <main class="ht-wrap ht-main">
+    <div data-home>
+      <!-- Hyper Trove: banners-with-categories (Left Top Categories 2-col card + Right 1 large + 3 small banners) -->
+      <section class="ht-banners{{#settings.show_tiles}}{{#has_categories}} has-side{{/has_categories}}{{/settings.show_tiles}}">
+        {{#settings.show_tiles}}{{#has_categories}}
+        <aside class="ht-catbar" aria-label="Top Categories">
+          <h2 class="ht-catbar-head">Top Categories</h2>
+          <div class="ht-catbar-grid">
+            {{#categories}}
+            <button class="ht-catbar-item" data-action="category" data-category="{{name}}">
+              <span class="ht-catbar-img">{{#image}}<img src="{{image}}" alt="" loading="lazy">{{/image}}{{^image}}{{initial}}{{/image}}</span>
+              <span class="ht-catbar-name">{{name}}</span>
+            </button>
+            {{/categories}}
+            <button class="ht-catbar-item" data-action="all">
+              <span class="ht-catbar-img">★</span>
+              <span class="ht-catbar-name">All ({{product_count}})</span>
+            </button>
+          </div>
+          <button class="ht-catbar-all" data-action="all">View all products →</button>
+        </aside>
+        {{/has_categories}}{{/settings.show_tiles}}
+
+        <div class="ht-banner-grid">
+          <div class="ht-hero-main">
+            {{#settings.hero_image}}<img class="ht-hero-bg" src="{{settings.hero_image}}" alt="">{{/settings.hero_image}}
+            <div class="ht-hero-scrim" aria-hidden="true"></div>
+            <div class="ht-hero-copy">
+              {{#settings.hero_badge}}<span class="ht-eyebrow">{{settings.hero_badge}}</span>{{/settings.hero_badge}}
+              <h1>{{#settings.hero_title}}{{settings.hero_title}}{{/settings.hero_title}}{{^settings.hero_title}}{{store.name}}{{/settings.hero_title}}</h1>
+              {{#settings.hero_text}}<p>{{settings.hero_text}}</p>{{/settings.hero_text}}{{^settings.hero_text}}{{#store.about}}<p>{{store.about}}</p>{{/store.about}}{{/settings.hero_text}}
+              <div class="ht-hero-acts">
+                {{#settings.hero_button}}<button class="ht-btn ht-btn-primary" data-action="scroll" data-target="ht-shelves">{{settings.hero_button}}</button>{{/settings.hero_button}}
+                {{#store.whatsapp}}<a class="ht-btn ht-btn-outline" href="https://wa.me/{{store.whatsapp}}" target="_blank">WhatsApp Order</a>{{/store.whatsapp}}
+              </div>
+            </div>
+          </div>
+
+          {{#settings.show_tiles}}
+          <div class="ht-sub-banners">
+            <div class="ht-mini-banner">
+              {{#settings.banner_1_image}}<img class="ht-mini-bg" src="{{settings.banner_1_image}}" alt="">{{/settings.banner_1_image}}
+              <div class="ht-mini-scrim" aria-hidden="true"></div>
+              <div class="ht-mini-copy">
+                <h4>B2B Carton Deals</h4>
+                <button class="ht-mini-btn" data-action="orders">Shop</button>
+              </div>
+            </div>
+            <div class="ht-mini-banner">
+              {{#settings.banner_2_image}}<img class="ht-mini-bg" src="{{settings.banner_2_image}}" alt="">{{/settings.banner_2_image}}
+              <div class="ht-mini-scrim" aria-hidden="true"></div>
+              <div class="ht-mini-copy">
+                <h4>Same-Day Dispatch</h4>
+                <button class="ht-mini-btn" data-action="scroll" data-target="ht-shelves">Shop</button>
+              </div>
+            </div>
+            <div class="ht-mini-banner">
+              {{#settings.banner_3_image}}<img class="ht-mini-bg" src="{{settings.banner_3_image}}" alt="">{{/settings.banner_3_image}}
+              <div class="ht-mini-scrim" aria-hidden="true"></div>
+              <div class="ht-mini-copy">
+                <h4>Wholesale &amp; Bulk</h4>
+                <button class="ht-mini-btn" data-action="scroll" data-target="ht-promo-band">Shop</button>
+              </div>
+            </div>
+          </div>
+          {{/settings.show_tiles}}
+        </div>
+      </section>
+
+      <!-- Hyper Trove: featured-collection Shelves -->
+      <div id="ht-shelves" class="ht-shelves ht-shelf-{{settings.shelf_style}}">
+        {{#sections}}
+        <section class="ht-sec" data-section="{{name}}">
+          <div class="ht-sec-head">
+            <div class="ht-sec-title">
+              <h2>{{title}}</h2>
+              <span class="ht-pill-count">{{count}} products</span>
+            </div>
+            {{#name}}<button class="ht-link" data-action="category" data-category="{{name}}">Shop All Products ›</button>{{/name}}
+          </div>
+          <div class="ht-shelf-items">{{#products}}{{> card}}{{/products}}</div>
+        </section>
+        {{/sections}}
+        {{^products}}<p class="ht-empty">Catalog is being updated. Check back soon.</p>{{/products}}
+      </div>
+
+      <!-- Hyper Trove: promotion-banner (.color-scheme-3) -->
+      {{#settings.promo_title}}
+      <section id="ht-promo-band" class="ht-promo">
+        {{#settings.promo_image}}<img class="ht-promo-bg" src="{{settings.promo_image}}" alt="" loading="lazy">{{/settings.promo_image}}
+        <div class="ht-promo-scrim" aria-hidden="true"></div>
+        <div class="ht-promo-copy">
+          {{#settings.promo_badge}}<span class="ht-promo-badge">{{settings.promo_badge}}</span>{{/settings.promo_badge}}
+          <h2>{{settings.promo_title}}</h2>
+          {{#settings.promo_text}}<p>{{settings.promo_text}}</p>{{/settings.promo_text}}
+        </div>
+        <div class="ht-promo-acts">
+          {{#store.whatsapp}}<a class="ht-btn ht-btn-white" href="https://wa.me/{{store.whatsapp}}" target="_blank">Message on WhatsApp</a>{{/store.whatsapp}}
+          <button class="ht-btn ht-btn-accent" data-action="orders">B2B Account</button>
+        </div>
+      </section>
+      {{/settings.promo_title}}
+
+      <!-- Hyper Trove: buttons-with-icon Category Strip -->
+      {{#has_categories}}
+      <section class="ht-btn-list-sec" aria-label="Browse by category">
+        <div class="ht-btn-list-head">
+          <span class="ht-subhead">Shop By Category</span>
+          <h2>Explore our full range</h2>
+        </div>
+        <div class="ht-icon-strip">
+          <button class="ht-icon-btn" data-action="all">
+            <span class="ht-icon-circle">★</span>
+            <span>All Items <small>({{product_count}})</small></span>
+          </button>
+          {{#categories}}
+          <button class="ht-icon-btn" data-action="category" data-category="{{name}}">
+            <span class="ht-icon-circle">{{#image}}<img src="{{image}}" alt="" loading="lazy">{{/image}}{{^image}}{{initial}}{{/image}}</span>
+            <span>{{name}} <small>({{count}})</small></span>
+          </button>
+          {{/categories}}
+        </div>
+      </section>
+      {{/has_categories}}
+
+      <!-- Hyper Trove: Dual Sale Banner Cards -->
+      <section class="ht-dual-cards">
+        <div class="ht-dual-card">
+          {{#settings.sale_card_1}}<img src="{{settings.sale_card_1}}" alt="" loading="lazy">{{/settings.sale_card_1}}
+          <div class="ht-dual-scrim" aria-hidden="true"></div>
+          <div class="ht-dual-copy">
+            <h3>Volume Tier Discounts</h3>
+            <p>Automatic savings on 10+ packs &amp; cartons.</p>
+            <button class="ht-btn ht-btn-primary" data-action="scroll" data-target="ht-shelves">Shop Now</button>
+          </div>
+        </div>
+        <div class="ht-dual-card">
+          {{#settings.sale_card_2}}<img src="{{settings.sale_card_2}}" alt="" loading="lazy">{{/settings.sale_card_2}}
+          <div class="ht-dual-scrim" aria-hidden="true"></div>
+          <div class="ht-dual-copy">
+            <h3>Business &amp; Horeca Accounts</h3>
+            <p>Dedicated 15% wholesale pricing on every order.</p>
+            <button class="ht-btn ht-btn-primary" data-action="orders">Sign In</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hyper Trove: collapsible-tabs FAQ (standing left column + accordion-card right) -->
+      {{#settings.show_faq}}
+      <section id="ht-faq-band" class="ht-faq">
+        <div class="ht-faq-wrap">
+          <div class="ht-faq-side">
+            {{#settings.faq_title}}<h2>{{settings.faq_title}}</h2>{{/settings.faq_title}}
+            <p>Shoot our team a message &amp; we’ll get back to you ASAP.</p>
+            {{#store.whatsapp}}<a class="ht-btn ht-btn-primary" href="https://wa.me/{{store.whatsapp}}" target="_blank">Contact Us</a>{{/store.whatsapp}}
+          </div>
+          <div class="ht-faq-grid">
+            {{#settings.faq_1_q}}<details open><summary>{{settings.faq_1_q}}</summary><p>{{settings.faq_1_a}}</p></details>{{/settings.faq_1_q}}
+            {{#settings.faq_2_q}}<details><summary>{{settings.faq_2_q}}</summary><p>{{settings.faq_2_a}}</p></details>{{/settings.faq_2_q}}
+            {{#settings.faq_3_q}}<details><summary>{{settings.faq_3_q}}</summary><p>{{settings.faq_3_a}}</p></details>{{/settings.faq_3_q}}
+          </div>
+        </div>
+      </section>
+      {{/settings.show_faq}}
+
+      <!-- Hyper Trove: multicolumn-icon Perks -->
+      <ul class="ht-perks">
+        {{#settings.perk_1}}<li>{{#settings.box_icon_1}}<img class="ht-perk-img" src="{{settings.box_icon_1}}" alt="" loading="lazy">{{/settings.box_icon_1}}{{^settings.box_icon_1}}<span class="ht-perk-dot" aria-hidden="true">✓</span>{{/settings.box_icon_1}}<span>{{settings.perk_1}}</span></li>{{/settings.perk_1}}
+        {{#settings.perk_2}}<li>{{#settings.box_icon_2}}<img class="ht-perk-img" src="{{settings.box_icon_2}}" alt="" loading="lazy">{{/settings.box_icon_2}}{{^settings.box_icon_2}}<span class="ht-perk-dot" aria-hidden="true">✓</span>{{/settings.box_icon_2}}<span>{{settings.perk_2}}</span></li>{{/settings.perk_2}}
+        {{#settings.perk_3}}<li>{{#settings.box_icon_3}}<img class="ht-perk-img" src="{{settings.box_icon_3}}" alt="" loading="lazy">{{/settings.box_icon_3}}{{^settings.box_icon_3}}<span class="ht-perk-dot" aria-hidden="true">✓</span>{{/settings.box_icon_3}}<span>{{settings.perk_3}}</span></li>{{/settings.perk_3}}
+        {{#settings.perk_4}}<li><span class="ht-perk-dot" aria-hidden="true">✓</span><span>{{settings.perk_4}}</span></li>{{/settings.perk_4}}
+      </ul>
+    </div>
+
+    <section class="ht-results" data-results hidden>
+      <div class="ht-sec-head">
+        <h2 data-bind="results-title"></h2>
+        <button class="ht-link" data-action="all">Clear filter</button>
+      </div>
+      <div class="ht-grid" data-slot="results"></div>
+    </section>
+  </main>
+
+  <!-- Hyper Trove: Footer (.color-scheme-inverse) -->
+  <footer class="ht-foot">
+    <div class="ht-wrap ht-foot-grid">
+      <div class="ht-foot-about">
+        <div class="ht-foot-brand">
+          {{#settings.logo_footer}}<img class="ht-foot-logo" src="{{settings.logo_footer}}" alt="{{store.name}}">{{/settings.logo_footer}}
+          {{^settings.logo_footer}}{{#store.logo}}<img src="{{store.logo}}" alt="">{{/store.logo}}{{^store.logo}}<span class="ht-mark" aria-hidden="true">{{store.initial}}</span>{{/store.logo}}{{/settings.logo_footer}}
+          <b>{{store.name}}</b>
+        </div>
+        {{#store.about}}<p>{{store.about}}</p>{{/store.about}}
+      </div>
+      <div class="ht-foot-col">
+        <h4>Customer Care</h4>
+        <button data-action="orders">My orders &amp; B2B</button>
+        <button data-action="cart">Shopping cart</button>
+        {{#store.whatsapp}}<a href="https://wa.me/{{store.whatsapp}}" target="_blank">WhatsApp Support</a>{{/store.whatsapp}}
+      </div>
+      <div class="ht-foot-col">
+        <h4>Storefront</h4>
+        <button data-action="all">All products</button>
+        {{#can_switch}}<button data-action="stores">Switch store</button>{{/can_switch}}
+      </div>
+    </div>
+    <div class="ht-wrap ht-copy">
+      <span>© {{year}} {{store.name}}</span>
+      <span>Hyper Trove</span>
+    </div>
+  </footer>
+</div>

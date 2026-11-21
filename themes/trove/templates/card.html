@@ -1,0 +1,27 @@
+<article class="ht-card{{#sold_out}} is-out{{/sold_out}}" data-card="{{id}}">
+  <div class="ht-media">
+    <button class="ht-photo" data-action="product" data-id="{{id}}" aria-label="{{name}}, see details">
+      {{#image}}<img src="{{image}}" alt="" loading="lazy">{{/image}}{{^image}}<span class="ht-ph-i" aria-hidden="true">{{initial}}</span>{{/image}}
+    </button>
+    {{#badge}}<span class="ht-badge">{{badge}}</span>{{/badge}}
+    <button class="ht-qv" data-action="quickview" data-id="{{id}}" aria-label="Quick view: {{name}}">
+      <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+  </div>
+  <div class="ht-card-body">
+    <div class="ht-card-top">
+      {{#category}}<span class="ht-card-cat">{{category}}</span>{{/category}}
+      {{#rating}}<span class="ht-stars" aria-label="{{avg}} out of 5 stars">★ {{avg}}</span>{{/rating}}
+    </div>
+    <h3><button data-action="product" data-id="{{id}}">{{name}}</button></h3>
+    <p class="ht-price">{{#from}}<small>From</small> {{/from}}<span>{{price}}</span></p>
+    <div class="ht-card-foot">
+      {{^sold_out}}
+      <button class="ht-add-btn{{#in_cart}} is-in{{/in_cart}}" data-action="add" data-id="{{id}}">
+        {{#in_cart}}<span>In Cart ({{in_cart}}) +</span>{{/in_cart}}{{^in_cart}}<span>+ Add to Cart</span>{{/in_cart}}
+      </button>
+      {{/sold_out}}
+      {{#sold_out}}<span class="ht-out-btn">Out of Stock</span>{{/sold_out}}
+    </div>
+  </div>
+</article>

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["/cdn/shop/t/3/assets/section-main-blog.css"],
+  "sourcesContent": [".main-blog__featured_post .section-divider {\n  margin-top: 4rem;\n}\n@media (max-width: 767.98px) {\n  .main-blog__featured_post .section-divider {\n    margin-top: 2.4rem;\n  }\n}\n.main-blog__block {\n  margin-top: 4rem;\n}\n@media (max-width: 767.98px) {\n  .main-blog__block {\n    margin-top: 2.4rem;\n  }\n}\n.main-blog__block:empty, .main-blog__block-first {\n  margin-top: 0;\n}\n.main-blog__heading + .main-blog__tags {\n  margin-top: 2.4rem;\n}\n.main-blog__tag {\n  --buttons-padding: 2rem;\n}\n"],
+  "mappings": "AAAA,CAAC,yBAAyB,CAAC,gBACzB,WAAY,IACd,CACA,OAAO,UAAY,UACjB,CAJD,yBAI2B,CAJD,gBAKvB,WAAY,MACd,CACF,CACA,CAAC,iBACC,WAAY,IACd,CACA,OAAO,UAAY,UACjB,CAJD,iBAKG,WAAY,MACd,CACF,CACA,CARC,gBAQgB,OAAQ,CAAC,uBACxB,WAAY,CACd,CACA,CAAC,kBAAmB,CAAE,CAAC,gBACrB,WAAY,MACd,CACA,CAAC,eACC,mBAAmB,IACrB",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["/cdn/shop/t/3/assets/section-featured-countdown-timer.css"],
+  "sourcesContent": [".countdown-with-multi .countdown-timer__block {\n  margin: 0 1.6rem;\n}\n@media (max-width: 767.98px) {\n  .countdown-with-multi .countdown-timer__block {\n    margin: 0 1.2rem;\n  }\n}\n.countdown-with-multi .countdown-timer__block div:after {\n  inset-inline-end: -1.8rem;\n}\n@media (max-width: 767.98px) {\n  .countdown-with-multi .countdown-timer__block div:after {\n    inset-inline-end: -1.5rem;\n  }\n}\n.countdown-with-multi__timer .card-media__countdown-timer {\n  margin-top: var(--icon-margin-top);\n}\n@media (max-width: 767.98px) {\n  .countdown-with-multi__timer {\n    margin-block-end: calc(1.2rem - var(--f-column-gap-mobile));\n  }\n}\n.countdown-with-multi__items .card-media__content-wrapper {\n  width: 100%;\n}\n\n@media (min-width: 1280px) {\n  .card-media--height-custom .countdown-with-multi__timer {\n    height: 100%;\n  }\n}\n.card-media--height-custom .card-media {\n  height: 100%;\n}\n"],
+  "mappings": "AAAA,CAAC,qBAAqB,CAAC,uBAAvB,OACU,EAAE,MACZ,CACA,OAAO,UAAY,UACjB,CAJD,qBAIuB,CAJD,uBAAvB,OAKY,EAAE,MACZ,CACF,CACA,CARC,qBAQqB,CARC,uBAQuB,GAAG,OAC/C,iBAAkB,OACpB,CACA,OAAO,UAAY,UACjB,CAZD,qBAYuB,CAZD,uBAYyB,GAAG,OAC/C,iBAAkB,OACpB,CACF,CACA,CAAC,4BAA4B,CAAC,4BAC5B,WAAY,IAAI,kBAClB,CACA,OAAO,UAAY,UACjB,CAJD,4BAKG,iBAAkB,KAAK,OAAO,EAAE,IAAI,uBACtC,CACF,CACA,CAAC,4BAA4B,CAAC,4BAC5B,MAAO,IACT,CAEA,OAAO,UAAY,QACjB,CAAC,0BAA0B,CAb5B,4BAcG,OAAQ,IACV,CACF,CACA,CAJG,0BAIwB,CAAC,WAC1B,OAAQ,IACV",
+  "names": []
+}

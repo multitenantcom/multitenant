@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hyper Trove — Mobile &amp; Desktop Responsive Preview Studio</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #1e293b;
+      --border: #334155;
+      --accent: #22c55e;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .badge {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    select, button, a.btn {
+      background: #0f172a;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 7px 13px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    button:hover, select:hover, a.btn:hover {
+      border-color: var(--accent);
+    }
+    button.active {
+      background: var(--accent);
+      color: #052e16;
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+    .workspace {
+      flex: 1;
+      display: flex;
+      gap: 24px;
+      padding: 24px;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-x: auto;
+    }
+    .device-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      flex-shrink: 0;
+    }
+    .device-header {
+      padding: 10px 16px;
+      background: rgba(15, 23, 42, 0.7);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .dots {
+      display: flex;
+      gap: 6px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #475569;
+    }
+    .dot.r { background: #ef4444; }
+    .dot.y { background: #f59e0b; }
+    .dot.g { background: #22c55e; }
+    iframe {
+      border: none;
+      background: #fff;
+      display: block;
+    }
+    /* View Modes */
+    .mode-split .device-mobile { width: 375px; }
+    .mode-split .device-mobile iframe { width: 375px; height: 780px; }
+    .mode-split .device-desktop { width: 1280px; }
+    .mode-split .device-desktop iframe { width: 1280px; height: 780px; }
+
+    .mode-mobile .device-desktop { display: none; }
+    .mode-mobile .device-mobile { width: 390px; }
+    .mode-mobile .device-mobile iframe { width: 390px; height: 844px; }
+
+    .mode-tablet .device-desktop { display: none; }
+    .mode-tablet .device-mobile { width: 768px; }
+    .mode-tablet .device-mobile iframe { width: 768px; height: 900px; }
+
+    .mode-desktop .device-mobile { display: none; }
+    .mode-desktop .device-desktop { width: 100%; max-width: 1440px; }
+    .mode-desktop .device-desktop iframe { width: 100%; height: 860px; }
+  </style>
+</head>
+<body class="mode-split">
+  <header>
+    <div class="brand">
+      <span>Hyper — Trove Preset Clone</span>
+      <span class="badge">Local Offline Ready</span>
+    </div>
+    <div class="controls">
+      <label for="pageSelect" style="font-size:12px;color:var(--muted);">Page:</label>
+      <select id="pageSelect" onchange="changePage(this.value)">
+        <option value="/">Home (/)</option>
+        <option value="/collections/all/">All Collections (/collections/all)</option>
+        <option value="/collections/vegetables-fruits/">Vegetables &amp; Fruits</option>
+        <option value="/collections/meat-seafood/">Meat &amp; Seafood</option>
+        <option value="/collections/bread-cake/">Bread &amp; Bakery</option>
+        <option value="/collections/dairy-egg/">Dairy &amp; Eggs</option>
+        <option value="/collections/beverages/">Beverages</option>
+        <option value="/collections/on-sale/">On Sale</option>
+        <option value="/products/premium-beef-short-ribs-bone-in-2-lb/">Product: Beef Short Ribs</option>
+        <option value="/products/bright-fresh-strawberry-clusters-1-lb/">Product: Fresh Strawberries</option>
+        <option value="/products/handcrafted-classic-french-croissants/">Product: French Croissants</option>
+        <option value="/products/smooth-buttery-avocado/">Product: Buttery Avocado</option>
+        <option value="/blogs/news/">Blog (/blogs/news)</option>
+        <option value="/pages/about-us/">About Us (/pages/about-us)</option>
+        <option value="/pages/contact-us/">Contact Us (/pages/contact-us)</option>
+        <option value="/pages/faqs/">FAQs (/pages/faqs)</option>
+        <option value="/pages/find-a-store/">Find a Store (/pages/find-a-store)</option>
+        <option value="/cart/">Cart (/cart)</option>
+      </select>
+      <button id="btn-split" class="active" onclick="setMode('split')">Split (Mobile + Desktop)</button>
+      <button id="btn-mobile" onclick="setMode('mobile')">Mobile (390×844)</button>
+      <button id="btn-tablet" onclick="setMode('tablet')">Tablet (768×900)</button>
+      <button id="btn-desktop" onclick="setMode('desktop')">Desktop (1440px)</button>
+      <a class="btn" id="directLink" href="/" target="_blank">Open Full Tab ↗</a>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <div class="device-card device-mobile">
+      <div class="device-header">
+        <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+        <span id="mobileLabel">Mobile View — 375 × 780</span>
+        <span>iOS / Android</span>
+      </div>
+      <iframe id="frameMobile" src="/"></iframe>
+    </div>
+
+    <div class="device-card device-desktop">
+      <div class="device-header">
+        <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+        <span>Desktop View — 1280 × 780</span>
+        <span>Widescreen</span>
+      </div>
+      <iframe id="frameDesktop" src="/"></iframe>
+    </div>
+  </main>
+
+  <script>
+    function setMode(mode) {
+      document.body.className = 'mode-' + mode;
+      ['split', 'mobile', 'tablet', 'desktop'].forEach(m => {
+        document.getElementById('btn-' + m).classList.toggle('active', m === mode);
+      });
+      const label = document.getElementById('mobileLabel');
+      if (mode === 'tablet') label.textContent = 'Tablet View — 768 × 900';
+      else if (mode === 'mobile') label.textContent = 'Mobile View — 390 × 844';
+      else label.textContent = 'Mobile View — 375 × 780';
+    }
+    function changePage(url) {
+      document.getElementById('frameMobile').src = url;
+      document.getElementById('frameDesktop').src = url;
+      document.getElementById('directLink').href = url;
+    }
+  </script>
+</body>
+</html>

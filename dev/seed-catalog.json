@@ -1,0 +1,1750 @@
+[
+  {
+    "handle": "almond-strawberry-milk-unsweet-vanilla-96-fl-oz-bottle",
+    "shopify_id": "9177229361381",
+    "title": "Almond Strawberry Milk, Unsweet Vanilla, 96 Fl oz Bottle",
+    "category": "Beverages",
+    "description": "Powerful, scalable solutions designed to help high-growth B2B and wholesale brands streamline operations and accelerate business growth.",
+    "image": "/cdn/shop/files/AlmondStrawberryMilkUnsweetVanilla-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809581224165",
+        "title": "Default Title",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-224165"
+      },
+      {
+        "shopify_variant_id": "46809581256933",
+        "title": "Default Title",
+        "price_cents": 1800,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-256933"
+      }
+    ]
+  },
+  {
+    "handle": "bright-fresh-strawberry-clusters-1-lb",
+    "shopify_id": "9177231851749",
+    "title": "Bright Fresh Strawberry Clusters, 1 lb",
+    "category": "On Sale",
+    "description": "Powerful, scalable solutions designed to help high-growth B2B and wholesale brands streamline operations and accelerate business growth.",
+    "image": "/cdn/shop/files/FreshStrawberry-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809585615077",
+        "title": "Default Title",
+        "price_cents": 800,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-615077"
+      },
+      {
+        "shopify_variant_id": "46809585647845",
+        "title": "Default Title",
+        "price_cents": 1200,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-647845"
+      },
+      {
+        "shopify_variant_id": "46809585680613",
+        "title": "Default Title",
+        "price_cents": 1600,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-680613"
+      }
+    ]
+  },
+  {
+    "handle": "handcrafted-classic-french-croissants",
+    "shopify_id": "9177232998629",
+    "title": "Handcrafted Classic French Croissants",
+    "category": "Bread & Cake",
+    "description": "Powerful, scalable solutions designed to help high-growth B2B and wholesale brands streamline operations and accelerate business growth.",
+    "image": "/cdn/shop/files/FrenchCroissants-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809587253477",
+        "title": "Default Title",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-253477"
+      },
+      {
+        "shopify_variant_id": "46809587286245",
+        "title": "Default Title",
+        "price_cents": 1700,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-286245"
+      }
+    ]
+  },
+  {
+    "handle": "premium-beef-short-ribs-bone-in-2-lb",
+    "shopify_id": "9177231392997",
+    "title": "Premium Beef Short Ribs Bone-in, 2 lb",
+    "category": "Meat & Seafood",
+    "description": "Powerful, scalable solutions designed to help high-growth B2B and wholesale brands streamline operations and accelerate business growth.",
+    "image": "/cdn/shop/files/PremiumBeefShortRibsBone-in-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809584730341",
+        "title": "Default Title",
+        "price_cents": 1600,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-730341"
+      },
+      {
+        "shopify_variant_id": "46809584763109",
+        "title": "Default Title",
+        "price_cents": 900,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-763109"
+      }
+    ]
+  },
+  {
+    "handle": "smooth-buttery-avocado",
+    "shopify_id": "9177234768101",
+    "title": "Smooth & Buttery Avocado",
+    "category": "Groceries",
+    "description": "Powerful, scalable solutions designed to help high-growth B2B and wholesale brands streamline operations and accelerate business growth.",
+    "image": "/cdn/shop/files/ButteryAvocado-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809590694117",
+        "title": "Default Title",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-694117"
+      },
+      {
+        "shopify_variant_id": "46809590726885",
+        "title": "Default Title",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-726885"
+      },
+      {
+        "shopify_variant_id": "46809590759653",
+        "title": "Default Title",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-759653"
+      }
+    ]
+  },
+  {
+    "handle": "fresh-tropical-coconut-1-lb",
+    "shopify_id": "9177230508261",
+    "title": "Fresh Tropical Coconut, 1 lb",
+    "category": "Vegetables & Fruits",
+    "description": "Fresh Tropical Coconut, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/TropicalCoconut-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809739698470",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-FRESH-TR"
+      }
+    ]
+  },
+  {
+    "handle": "tender-garden-peaches",
+    "shopify_id": "9177234014437",
+    "title": "Tender Garden Peaches",
+    "category": "New Arrivals",
+    "description": "Tender Garden Peaches \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/GardenPeaches-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809697522308",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-TENDER-G"
+      }
+    ]
+  },
+  {
+    "handle": "baby-bok-choy-1-bunch",
+    "shopify_id": "9177234833637",
+    "title": "Baby Bok Choy, 1 bunch",
+    "category": "Vegetables & Fruits",
+    "description": "Baby Bok Choy, 1 bunch \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/BabyBokChoy-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809791630200",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-BABY-BOK"
+      }
+    ]
+  },
+  {
+    "handle": "gift-card",
+    "shopify_id": "9194567467237",
+    "title": "Gift Card",
+    "category": "Groceries",
+    "description": "Gift Card \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/gift-card-20.webp",
+    "variants": [
+      {
+        "shopify_variant_id": "46809050025838",
+        "title": "Standard",
+        "price_cents": 2000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-GIFT-CAR"
+      }
+    ]
+  },
+  {
+    "handle": "organic-sweet-pears-1-lb",
+    "shopify_id": "9177230901477",
+    "title": "Organic Sweet Pears, 1 lb",
+    "category": "On Sale",
+    "description": "Organic Sweet Pears, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SweetPears-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809134461718",
+        "title": "Standard",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-ORGANIC-"
+      }
+    ]
+  },
+  {
+    "handle": "bright-ruby-pomegranate-1-lb",
+    "shopify_id": "9177229787365",
+    "title": "Bright Ruby Pomegranate, 1 lb",
+    "category": "New Arrivals",
+    "description": "Bright Ruby Pomegranate, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/Pomegranate-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809735140725",
+        "title": "Standard",
+        "price_cents": 600,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-BRIGHT-R"
+      }
+    ]
+  },
+  {
+    "handle": "tender-garden-kiwis-1-lb",
+    "shopify_id": "9177229066469",
+    "title": "Tender Garden Kiwis, 1 lb",
+    "category": "Groceries",
+    "description": "Tender Garden Kiwis, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/GardenKiwis-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809891850861",
+        "title": "Standard",
+        "price_cents": 800,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-TENDER-G"
+      }
+    ]
+  },
+  {
+    "handle": "fresh-tropical-mangoes-1-lb",
+    "shopify_id": "9177229459685",
+    "title": "Fresh Tropical Mangoes, 1 lb",
+    "category": "New Arrivals",
+    "description": "Fresh Tropical Mangoes, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/Mangoes-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809374281508",
+        "title": "Standard",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-FRESH-TR"
+      }
+    ]
+  },
+  {
+    "handle": "traditional-chinese-style-pork-sausage-1-lb",
+    "shopify_id": "9177230606565",
+    "title": "Traditional Chinese Style Pork Sausage 1 Lb",
+    "category": "Groceries",
+    "description": "Traditional Chinese Style Pork Sausage 1 Lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/TraditionalChineseStylePorkSausage-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809250789238",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-TRADITIO"
+      }
+    ]
+  },
+  {
+    "handle": "crisp-fresh-red-apples-1-lb",
+    "shopify_id": "9177229230309",
+    "title": "Crisp Fresh Red Apples, 1 lb",
+    "category": "Vegetables & Fruits",
+    "description": "Crisp Fresh Red Apples, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/RedApples-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809688454919",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-CRISP-FR"
+      }
+    ]
+  },
+  {
+    "handle": "signature-german-sausages-1-lb",
+    "shopify_id": "9177229656293",
+    "title": "Signature German Sausages, 1 lb",
+    "category": "Groceries",
+    "description": "Signature German Sausages, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SignatureGermanSausages-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809581694316",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SIGNATUR"
+      }
+    ]
+  },
+  {
+    "handle": "signature-pork-sausages-1-lb",
+    "shopify_id": "9177230049509",
+    "title": "Signature Pork Sausages 1 Lb",
+    "category": "Meat & Seafood",
+    "description": "Signature Pork Sausages 1 Lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SignaturePorkSausages-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809304290415",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SIGNATUR"
+      }
+    ]
+  },
+  {
+    "handle": "premium-pork-shoulder-blade-steak-2-lb",
+    "shopify_id": "9177230442725",
+    "title": "Premium Pork Shoulder Blade Steak 2 Lb",
+    "category": "Groceries",
+    "description": "Premium Pork Shoulder Blade Steak 2 Lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/PremiumPorkShoulderBladeSteak-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809696016874",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-PREMIUM-"
+      }
+    ]
+  },
+  {
+    "handle": "signature-ground-beef-1-lb",
+    "shopify_id": "9177230967013",
+    "title": "Signature Ground Beef 1 Lb",
+    "category": "Meat & Seafood",
+    "description": "Signature Ground Beef 1 Lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SignatureGroundBeef-in-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809287527932",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SIGNATUR"
+      }
+    ]
+  },
+  {
+    "handle": "signature-prosciutto-slices-1-lb",
+    "shopify_id": "9177232179429",
+    "title": "Signature Prosciutto Slices 1 Lb",
+    "category": "Groceries",
+    "description": "Signature Prosciutto Slices 1 Lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SignatureProsciuttoSlices-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809129569759",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SIGNATUR"
+      }
+    ]
+  },
+  {
+    "handle": "smoked-bacon-slices-1-lb",
+    "shopify_id": "9177232769253",
+    "title": "Smoked Bacon Slices 1 Lb",
+    "category": "Meat & Seafood",
+    "description": "Smoked Bacon Slices 1 Lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SmokedBaconSlices-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809417820049",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SMOKED-B"
+      }
+    ]
+  },
+  {
+    "handle": "organic-green-bell-pepper-pods-1-lb",
+    "shopify_id": null,
+    "title": "Organic Green Bell Pepper Pods, 1 lb",
+    "category": "Groceries",
+    "description": "Organic Green Bell Pepper Pods, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/GreenBellPepper-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809365394159",
+        "title": "Standard",
+        "price_cents": 200,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-ORGANIC-"
+      }
+    ]
+  },
+  {
+    "handle": "freshly-picked-garden-cherry-tomatoes-1-pack",
+    "shopify_id": "9177232670949",
+    "title": "Freshly Picked Garden Cherry Tomatoes, 1 pack",
+    "category": "On Sale",
+    "description": "Freshly Picked Garden Cherry Tomatoes, 1 pack \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/FreshlyPickedGardenCherryTomatoes-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809794656201",
+        "title": "Standard",
+        "price_cents": 800,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-FRESHLY-"
+      }
+    ]
+  },
+  {
+    "handle": "crunchy-orange-baby-carrots-1-lb",
+    "shopify_id": "9177228804325",
+    "title": "Crunchy Orange Baby Carrots, 1 lb",
+    "category": "Vegetables & Fruits",
+    "description": "Crunchy Orange Baby Carrots, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/BabyCarrots-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809549039068",
+        "title": "Standard",
+        "price_cents": 600,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-CRUNCHY-"
+      }
+    ]
+  },
+  {
+    "handle": "organic-red-bell-pepper-harvest-1-lb",
+    "shopify_id": "9177229197541",
+    "title": "Organic Red Bell Pepper Harvest, 1 lb",
+    "category": "On Sale",
+    "description": "Organic Red Bell Pepper Harvest, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/RedBellPepper-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809851037549",
+        "title": "Standard",
+        "price_cents": 200,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-ORGANIC-"
+      }
+    ]
+  },
+  {
+    "handle": "boneless-ribeye-steak-cuts-1-lb",
+    "shopify_id": null,
+    "title": "Boneless Ribeye Steak Cuts, 1 lb",
+    "category": "Groceries",
+    "description": "Boneless Ribeye Steak Cuts, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/BonelessRibeyeSteakCuts-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809239654196",
+        "title": "Standard",
+        "price_cents": 1200,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-BONELESS"
+      }
+    ]
+  },
+  {
+    "handle": "rich-and-creamy-bundt-cake",
+    "shopify_id": "9177228902629",
+    "title": "Rich and Creamy Bundt Cake",
+    "category": "Bread & Cake",
+    "description": "Rich and Creamy Bundt Cake \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/BundtCake-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809075355205",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-RICH-AND"
+      }
+    ]
+  },
+  {
+    "handle": "rich-and-moist-chocolate-muffins",
+    "shopify_id": "9177232408805",
+    "title": "Rich and Moist Chocolate Muffins",
+    "category": "Bread & Cake",
+    "description": "Rich and Moist Chocolate Muffins \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/ChocolateMuffins-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809214773412",
+        "title": "Standard",
+        "price_cents": 900,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-RICH-AND"
+      }
+    ]
+  },
+  {
+    "handle": "smooth-and-creamy-flan-dessert",
+    "shopify_id": null,
+    "title": "Smooth and Creamy Flan Dessert",
+    "category": "Groceries",
+    "description": "Smooth and Creamy Flan Dessert \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/FlanDessert-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809384938380",
+        "title": "Standard",
+        "price_cents": 400,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SMOOTH-A"
+      }
+    ]
+  },
+  {
+    "handle": "soft-and-fruity-panettone-bread",
+    "shopify_id": "9177230344421",
+    "title": "Soft and Fruity Panettone Bread",
+    "category": "Bread & Cake",
+    "description": "Soft and Fruity Panettone Bread \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/PanettoneBread-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809782984902",
+        "title": "Standard",
+        "price_cents": 900,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SOFT-AND"
+      }
+    ]
+  },
+  {
+    "handle": "fresh-harvest-cauliflower-florets-1-lb",
+    "shopify_id": "9177233719525",
+    "title": "Fresh Harvest Cauliflower Florets, 1 lb",
+    "category": "Vegetables & Fruits",
+    "description": "Fresh Harvest Cauliflower Florets, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/FreshHarvestCauliflowerFlorets-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809426096109",
+        "title": "Standard",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-FRESH-HA"
+      }
+    ]
+  },
+  {
+    "handle": "energy-drink-ultra-sunrise-16-fl-oz",
+    "shopify_id": "9177230475493",
+    "title": "Energy Drink, Ultra Sunrise, 16 Fl oz",
+    "category": "Beverages",
+    "description": "Energy Drink, Ultra Sunrise, 16 Fl oz \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/EnergyDrinkUltraSunrise-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809258631312",
+        "title": "Standard",
+        "price_cents": 2000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-ENERGY-D"
+      }
+    ]
+  },
+  {
+    "handle": "premium-atlantic-salmon-fillet-1-lb",
+    "shopify_id": "9177234866405",
+    "title": "Premium Atlantic Salmon Fillet, 1 lb",
+    "category": "Meat & Seafood",
+    "description": "Premium Atlantic Salmon Fillet, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/PremiumAtlanticSalmonFillet-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809501827158",
+        "title": "Standard",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-PREMIUM-"
+      }
+    ]
+  },
+  {
+    "handle": "yogurt-with-berries",
+    "shopify_id": "9177230868709",
+    "title": "Yogurt with Berries",
+    "category": "Dairy & Egg",
+    "description": "Yogurt with Berries \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/YogurtBerries-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809339513372",
+        "title": "Standard",
+        "price_cents": 1200,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-YOGURT-W"
+      }
+    ]
+  },
+  {
+    "handle": "tender-organic-kale-leaves-1-pack",
+    "shopify_id": "9177234473189",
+    "title": "Tender Organic Kale Leaves, 1 pack",
+    "category": "New Arrivals",
+    "description": "Tender Organic Kale Leaves, 1 pack \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/TenderOrganicKaleLeaves-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809662460974",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-TENDER-O"
+      }
+    ]
+  },
+  {
+    "handle": "sweet-corn-on-the-cob-1-pack",
+    "shopify_id": "9177230278885",
+    "title": "Sweet Corn on the Cob, 1 pack",
+    "category": "Groceries",
+    "description": "Sweet Corn on the Cob, 1 pack \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SweetCorn-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809582698725",
+        "title": "Standard",
+        "price_cents": 500,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SWEET-CO"
+      }
+    ]
+  },
+  {
+    "handle": "sweet-crisp-baby-cabbage-1-lb",
+    "shopify_id": "9177230573797",
+    "title": "Sweet & Crisp Baby Cabbage, 1 lb",
+    "category": "New Arrivals",
+    "description": "Sweet & Crisp Baby Cabbage, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/BabyCabbage-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809583255781",
+        "title": "Standard",
+        "price_cents": 1300,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SWEET-CR"
+      }
+    ]
+  },
+  {
+    "handle": "spring-harvest-asparagus-spears-1-bunch",
+    "shopify_id": "9177230835941",
+    "title": "Spring Harvest Asparagus Spears, 1 bunch",
+    "category": "New Arrivals",
+    "description": "Spring Harvest Asparagus Spears, 1 bunch \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/HarvestAsparagusSpears-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809583714533",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SPRING-H"
+      }
+    ]
+  },
+  {
+    "handle": "smooth-and-shiny-fresh-eggplants-1-lb",
+    "shopify_id": "9177231261925",
+    "title": "Smooth and Shiny Fresh Eggplants, 1 lb",
+    "category": "Groceries",
+    "description": "Smooth and Shiny Fresh Eggplants, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/FreshEggplants-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809584533733",
+        "title": "Standard",
+        "price_cents": 1600,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SMOOTH-A"
+      }
+    ]
+  },
+  {
+    "handle": "lush-garden-sweet-snap-peas-1-bag",
+    "shopify_id": "9177229820133",
+    "title": "Lush Garden Sweet Snap Peas, 1 bag",
+    "category": "Groceries",
+    "description": "Lush Garden Sweet Snap Peas, 1 bag \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SnapPeas-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809582010597",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-LUSH-GAR"
+      }
+    ]
+  },
+  {
+    "handle": "golden-white-cauliflower-florets-1-lb",
+    "shopify_id": "9177229426917",
+    "title": "Golden White Cauliflower Florets, 1 lb",
+    "category": "Groceries",
+    "description": "Golden White Cauliflower Florets, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/WhiteCauliflowerFlorets-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809581322469",
+        "title": "Standard",
+        "price_cents": 600,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-GOLDEN-W"
+      }
+    ]
+  },
+  {
+    "handle": "juicy-garden-green-apples-1-lb",
+    "shopify_id": "9177232605413",
+    "title": "Juicy Garden Green Apples, 1 lb",
+    "category": "On Sale",
+    "description": "Juicy Garden Green Apples, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/GreenApples-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809586696421",
+        "title": "Standard",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-JUICY-GA"
+      }
+    ]
+  },
+  {
+    "handle": "juicy-wild-blueberries-1-lb",
+    "shopify_id": "9177231163621",
+    "title": "Juicy Wild Blueberries, 1 lb",
+    "category": "On Sale",
+    "description": "Juicy Wild Blueberries, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/WildBlueberries-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809584369893",
+        "title": "Standard",
+        "price_cents": 800,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-JUICY-WI"
+      }
+    ]
+  },
+  {
+    "handle": "bright-fresh-tangerine-1-lb",
+    "shopify_id": "9177230213349",
+    "title": "Bright Fresh Tangerine, 1 lb",
+    "category": "On Sale",
+    "description": "Bright Fresh Tangerine, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/FreshTangerine-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809582567653",
+        "title": "Standard",
+        "price_cents": 800,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-BRIGHT-F"
+      }
+    ]
+  },
+  {
+    "handle": "sweet-ripe-cherry-bunches",
+    "shopify_id": "9177234407653",
+    "title": "Sweet Ripe Cherry Bunches",
+    "category": "Groceries",
+    "description": "Sweet Ripe Cherry Bunches \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/RipeCherry-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809589907685",
+        "title": "Standard",
+        "price_cents": 800,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SWEET-RI"
+      }
+    ]
+  },
+  {
+    "handle": "rustic-round-bread",
+    "shopify_id": "9177234571493",
+    "title": "Rustic Round Bread",
+    "category": "Bread & Cake",
+    "description": "Rustic Round Bread \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/RusticRoundBread-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809590202597",
+        "title": "Standard",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-RUSTIC-R"
+      }
+    ]
+  },
+  {
+    "handle": "white-bread-loaf",
+    "shopify_id": "9177234964709",
+    "title": "White Bread Loaf",
+    "category": "Bread & Cake",
+    "description": "White Bread Loaf \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/WhiteBreadLoaf-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809592692965",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-WHITE-BR"
+      }
+    ]
+  },
+  {
+    "handle": "handcrafted-sweet-brioche-loaf",
+    "shopify_id": "9177234145509",
+    "title": "Handcrafted Sweet Brioche Loaf",
+    "category": "Bread & Cake",
+    "description": "Handcrafted Sweet Brioche Loaf \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/HandcraftedSweetBriocheLoaf-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809589514469",
+        "title": "Standard",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-HANDCRAF"
+      }
+    ]
+  },
+  {
+    "handle": "soft-and-chewy-pretzel-twists",
+    "shopify_id": "9177233785061",
+    "title": "Soft and Chewy Pretzel Twists",
+    "category": "Bread & Cake",
+    "description": "Soft and Chewy Pretzel Twists \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/PretzelTwists-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809588826341",
+        "title": "Standard",
+        "price_cents": 1700,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SOFT-AND"
+      }
+    ]
+  },
+  {
+    "handle": "cupcake-with-fruit-topping",
+    "shopify_id": "9177231589605",
+    "title": "Cupcake with Fruit Topping",
+    "category": "Bread & Cake",
+    "description": "Cupcake with Fruit Topping \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/CupcakeFruit-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809584992485",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-CUPCAKE-"
+      }
+    ]
+  },
+  {
+    "handle": "donut-frosted-topped",
+    "shopify_id": "9177231032549",
+    "title": "Donut (Frosted & Topped)",
+    "category": "Bread & Cake",
+    "description": "Donut (Frosted & Topped) \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/Donut-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809584140517",
+        "title": "Standard",
+        "price_cents": 500,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-DONUT-FR"
+      }
+    ]
+  },
+  {
+    "handle": "fresh-organic-heirloom-tomatoes-1-lb",
+    "shopify_id": "9177229000933",
+    "title": "Fresh Organic Heirloom Tomatoes, 1 lb",
+    "category": "Vegetables & Fruits",
+    "description": "Fresh Organic Heirloom Tomatoes, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/HeirloomTomatoes-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809144969226",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-FRESH-OR"
+      }
+    ]
+  },
+  {
+    "handle": "artisan-crafted-vegan-pasta",
+    "shopify_id": "9177233490149",
+    "title": "Artisan Crafted Vegan Pasta",
+    "category": "Dairy & Egg",
+    "description": "Artisan Crafted Vegan Pasta \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/VeganPasta-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809118316813",
+        "title": "Standard",
+        "price_cents": 1200,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-ARTISAN-"
+      }
+    ]
+  },
+  {
+    "handle": "premium-quality-walnut-halves-1-lb",
+    "shopify_id": null,
+    "title": "Premium Quality Walnut Halves, 1 lb",
+    "category": "Groceries",
+    "description": "Premium Quality Walnut Halves, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/QualityWalnutHalves-1_3b015372-655c-437e-9c00-740e9b43c71b.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809631444686",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-PREMIUM-"
+      }
+    ]
+  },
+  {
+    "handle": "classic-italian-dry-spaghetti-500g",
+    "shopify_id": "9177232474341",
+    "title": "Classic Italian Dry Spaghetti, 500g",
+    "category": "Dairy & Egg",
+    "description": "Classic Italian Dry Spaghetti, 500g \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/DrySpaghetti-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809208613361",
+        "title": "Standard",
+        "price_cents": 200,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-CLASSIC-"
+      }
+    ]
+  },
+  {
+    "handle": "handcrafted-sweet-ice-cream-cone",
+    "shopify_id": "9177230704869",
+    "title": "Handcrafted Sweet Ice Cream Cone",
+    "category": "Dairy & Egg",
+    "description": "Handcrafted Sweet Ice Cream Cone \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SweetIceCreamCone-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809516329006",
+        "title": "Standard",
+        "price_cents": 400,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-HANDCRAF"
+      }
+    ]
+  },
+  {
+    "handle": "fresh-harvested-watermelons-1-lb",
+    "shopify_id": "9177228869861",
+    "title": "Fresh Harvested Watermelons, 1 lb",
+    "category": "Vegetables & Fruits",
+    "description": "Fresh Harvested Watermelons, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/Watermelons-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809140445979",
+        "title": "Standard",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-FRESH-HA"
+      }
+    ]
+  },
+  {
+    "handle": "delicate-soft-ripe-fig",
+    "shopify_id": "9177233653989",
+    "title": "Delicate Soft Ripe Fig",
+    "category": "Vegetables & Fruits",
+    "description": "Delicate Soft Ripe Fig \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SoftRipeFig-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809102321210",
+        "title": "Standard",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-DELICATE"
+      }
+    ]
+  },
+  {
+    "handle": "crisp-and-juicy-onion-bulbs-1-lb",
+    "shopify_id": "9177228247269",
+    "title": "Crisp and Juicy Onion Bulbs, 1 lb",
+    "category": "Vegetables & Fruits",
+    "description": "Crisp and Juicy Onion Bulbs, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/OnionBulbs-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809695414691",
+        "title": "Standard",
+        "price_cents": 600,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-CRISP-AN"
+      }
+    ]
+  },
+  {
+    "handle": "fresh-garden-brussels-sprouts-1-lb",
+    "shopify_id": "9177234079973",
+    "title": "Fresh Garden Brussels Sprouts 1 Lb",
+    "category": "Vegetables & Fruits",
+    "description": "Fresh Garden Brussels Sprouts 1 Lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/FreshGardenBrusselsSprouts-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809380312124",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-FRESH-GA"
+      }
+    ]
+  },
+  {
+    "handle": "filet-mignon-beef-tenderloin-1-lb",
+    "shopify_id": "9177234276581",
+    "title": "Filet Mignon Beef Tenderloin 1 Lb",
+    "category": "Vegetables & Fruits",
+    "description": "Filet Mignon Beef Tenderloin 1 Lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/FiletMignonBeefTenderloin-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809276179052",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-FILET-MI"
+      }
+    ]
+  },
+  {
+    "handle": "tender-white-fish-fillet-with-lemon-and-herbs-2-lb",
+    "shopify_id": "9177231065317",
+    "title": "Tender White Fish Fillet With Lemon And Herbs 2 Lb",
+    "category": "Meat & Seafood",
+    "description": "Tender White Fish Fillet With Lemon And Herbs 2 Lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/TenderWhiteFishFillet-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809172893521",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-TENDER-W"
+      }
+    ]
+  },
+  {
+    "handle": "salmon-avocado-sushi-roll-1-lb",
+    "shopify_id": "9177230770405",
+    "title": "Salmon Avocado Sushi Roll, 1 lb",
+    "category": "Meat & Seafood",
+    "description": "Salmon Avocado Sushi Roll, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SalmonAvocadoSushiRoll-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809326624239",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SALMON-A"
+      }
+    ]
+  },
+  {
+    "handle": "vacuum-sealed-salmon-loin-1-lb",
+    "shopify_id": "9177234112741",
+    "title": "Vacuum Sealed Salmon Loin 1 Lb",
+    "category": "Meat & Seafood",
+    "description": "Vacuum Sealed Salmon Loin 1 Lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/Vacuum-SealedSalmonLoin-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809613830043",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-VACUUM-S"
+      }
+    ]
+  },
+  {
+    "handle": "prosciutto-style-dry-cured-ham-1-lb",
+    "shopify_id": "9177233883365",
+    "title": "Prosciutto Style Dry Cured Ham 1 Lb",
+    "category": "Meat & Seafood",
+    "description": "Prosciutto Style Dry Cured Ham 1 Lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/ProsciuttoStyleDryCuredHam-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809663707813",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-PROSCIUT"
+      }
+    ]
+  },
+  {
+    "handle": "boneless-pork-shoulder-roast-2-lb",
+    "shopify_id": "9177233228005",
+    "title": "Boneless Pork Shoulder Roast 2 Lb",
+    "category": "Meat & Seafood",
+    "description": "Boneless Pork Shoulder Roast 2 Lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/BonelessPorkShoulderRoast-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809789190262",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-BONELESS"
+      }
+    ]
+  },
+  {
+    "handle": "sushi-grade-salmon-tray-1-lb",
+    "shopify_id": "9177232113893",
+    "title": "Sushi-Grade Salmon Tray, 1 lb",
+    "category": "Meat & Seafood",
+    "description": "Sushi-Grade Salmon Tray, 1 lb \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/Sushi-GradeSalmonTray-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809377888777",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SUSHI-GR"
+      }
+    ]
+  },
+  {
+    "handle": "handcrafted-traditional-baguettes",
+    "shopify_id": "9177230737637",
+    "title": "Handcrafted Traditional Baguettes",
+    "category": "Bread & Cake",
+    "description": "Handcrafted Traditional Baguettes \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/TraditionalBaguettes-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809678133710",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-HANDCRAF"
+      }
+    ]
+  },
+  {
+    "handle": "hearty-freshly-baked-rye-bread",
+    "shopify_id": "9177229951205",
+    "title": "Hearty Freshly Baked Rye Bread",
+    "category": "Bread & Cake",
+    "description": "Hearty Freshly Baked Rye Bread \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/RyeBread-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809332821829",
+        "title": "Standard",
+        "price_cents": 600,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-HEARTY-F"
+      }
+    ]
+  },
+  {
+    "handle": "freshly-baked-classic-muffins",
+    "shopify_id": "9177229623525",
+    "title": "Freshly Baked Classic Muffins",
+    "category": "Bread & Cake",
+    "description": "Freshly Baked Classic Muffins \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/ClassicMuffins-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809105279097",
+        "title": "Standard",
+        "price_cents": 600,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-FRESHLY-"
+      }
+    ]
+  },
+  {
+    "handle": "handcrafted-classic-strawberry-shortcake",
+    "shopify_id": "9177229328613",
+    "title": "Handcrafted Classic Strawberry Shortcake",
+    "category": "Bread & Cake",
+    "description": "Handcrafted Classic Strawberry Shortcake \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/StrawberryShortcake-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809669490245",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-HANDCRAF"
+      }
+    ]
+  },
+  {
+    "handle": "chocolate-swirl-bread",
+    "shopify_id": "9177229099237",
+    "title": "Chocolate Swirl Bread",
+    "category": "Bread & Cake",
+    "description": "Chocolate Swirl Bread \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/ChocolateSwirlBread-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809828047716",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-CHOCOLAT"
+      }
+    ]
+  },
+  {
+    "handle": "danish-pastry-with-fruit",
+    "shopify_id": "9177228706021",
+    "title": "Danish Pastry with Fruit",
+    "category": "Bread & Cake",
+    "description": "Danish Pastry with Fruit \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/DanishPastry-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809206915497",
+        "title": "Standard",
+        "price_cents": 600,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-DANISH-P"
+      }
+    ]
+  },
+  {
+    "handle": "brown-eggs-small-size",
+    "shopify_id": "9177234899173",
+    "title": "Brown Eggs (Small Size)",
+    "category": "Dairy & Egg",
+    "description": "Brown Eggs (Small Size) \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/BrownEggsSmall-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809577589580",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-BROWN-EG"
+      }
+    ]
+  },
+  {
+    "handle": "brown-eggs-big-size",
+    "shopify_id": "9177234342117",
+    "title": "Brown Eggs (Big Size)",
+    "category": "Dairy & Egg",
+    "description": "Brown Eggs (Big Size) \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/BrownEggsBig-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809718798021",
+        "title": "Standard",
+        "price_cents": 1200,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-BROWN-EG"
+      }
+    ]
+  },
+  {
+    "handle": "farm-fresh-natural-white-eggs",
+    "shopify_id": "9177233981669",
+    "title": "Farm Fresh Natural White Eggs",
+    "category": "Dairy & Egg",
+    "description": "Farm Fresh Natural White Eggs \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/WhiteEggs-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809190875090",
+        "title": "Standard",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-FARM-FRE"
+      }
+    ]
+  },
+  {
+    "handle": "creamy-soft-camembert-cheese",
+    "shopify_id": "9177231982821",
+    "title": "Creamy Soft Camembert Cheese",
+    "category": "Dairy & Egg",
+    "description": "Creamy Soft Camembert Cheese \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/CamembertCheese-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809010161841",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-CREAMY-S"
+      }
+    ]
+  },
+  {
+    "handle": "classic-vintage-cheddar-cheese",
+    "shopify_id": "9177231130853",
+    "title": "Classic Vintage Cheddar Cheese",
+    "category": "Dairy & Egg",
+    "description": "Classic Vintage Cheddar Cheese \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/CheddarCheese-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809834783536",
+        "title": "Standard",
+        "price_cents": 1000,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-CLASSIC-"
+      }
+    ]
+  },
+  {
+    "handle": "natural-flavored-yogurt",
+    "shopify_id": "9177230311653",
+    "title": "Natural Flavored Yogurt",
+    "category": "Dairy & Egg",
+    "description": "Natural Flavored Yogurt \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/FlavoredYogurt-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809722926732",
+        "title": "Standard",
+        "price_cents": 700,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-NATURAL-"
+      }
+    ]
+  },
+  {
+    "handle": "strawberry-yogurt-drink",
+    "shopify_id": "9177229852901",
+    "title": "Strawberry Yogurt Drink",
+    "category": "Dairy & Egg",
+    "description": "Strawberry Yogurt Drink \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/StrawberryYogurtDrink-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809790490819",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-STRAWBER"
+      }
+    ]
+  },
+  {
+    "handle": "bottled-water-with-minerals-16-9-fl-oz",
+    "shopify_id": "9177234637029",
+    "title": "Bottled Water With Minerals 16 9 Fl Oz",
+    "category": "Beverages",
+    "description": "Bottled Water With Minerals 16 9 Fl Oz \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/BottledWaterwithMinerals-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809367900129",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-BOTTLED-"
+      }
+    ]
+  },
+  {
+    "handle": "alpine-spring-water-128-fl-oz",
+    "shopify_id": "9177234309349",
+    "title": "Alpine Spring Water, 128 Fl oz",
+    "category": "Beverages",
+    "description": "Alpine Spring Water, 128 Fl oz \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/AlpineSpringWater-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809751853988",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-ALPINE-S"
+      }
+    ]
+  },
+  {
+    "handle": "seltzer-sparkling-water-33-8-fl-oz",
+    "shopify_id": "9177233916133",
+    "title": "Seltzer Sparkling Water, 33.8 Fl oz",
+    "category": "Beverages",
+    "description": "Seltzer Sparkling Water, 33.8 Fl oz \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SeltzerSparklingWater-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809110698824",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SELTZER-"
+      }
+    ]
+  },
+  {
+    "handle": "evian-natural-spring-water-6-pack",
+    "shopify_id": "9177233359077",
+    "title": "Evian Natural Spring Water 6 Pack",
+    "category": "Beverages",
+    "description": "Evian Natural Spring Water 6 Pack \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/EvianNaturalSpringWater-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809618813164",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-EVIAN-NA"
+      }
+    ]
+  },
+  {
+    "handle": "tropicana-orange-46-fl-oz-bottle",
+    "shopify_id": "9177232900325",
+    "title": "Tropicana Orange, 46 Fl oz Bottle",
+    "category": "Beverages",
+    "description": "Tropicana Orange, 46 Fl oz Bottle \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/TropicanaOrange-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809175097046",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-TROPICAN"
+      }
+    ]
+  },
+  {
+    "handle": "sparkling-drink-organic-orange-12-fl-oz",
+    "shopify_id": "9177232277733",
+    "title": "Sparkling Drink Organic Orange 12 Fl Oz",
+    "category": "Beverages",
+    "description": "Sparkling Drink Organic Orange 12 Fl Oz \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SparklingDrinkOrganicOrange-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809758268252",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SPARKLIN"
+      }
+    ]
+  },
+  {
+    "handle": "organic-immunity-boost-original-15-2-fl-oz",
+    "shopify_id": "9177231491301",
+    "title": "Organic Immunity Boost Original 15 2 Fl Oz",
+    "category": "Beverages",
+    "description": "Organic Immunity Boost Original 15 2 Fl Oz \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/OrganicImmunityBoostOriginal-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809590323399",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-ORGANIC-"
+      }
+    ]
+  },
+  {
+    "handle": "sparkling-peach-vibe-12-fl-oz",
+    "shopify_id": "9177230999781",
+    "title": "Sparkling Peach Vibe, 12 Fl oz",
+    "category": "Beverages",
+    "description": "Sparkling Peach Vibe, 12 Fl oz \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SparklingPeachVibe-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809260132822",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SPARKLIN"
+      }
+    ]
+  },
+  {
+    "handle": "waltz-lemon-energy-drink-12-fl-oz",
+    "shopify_id": "9177230639333",
+    "title": "Waltz Lemon, Energy Drink, 12 Fl oz",
+    "category": "Beverages",
+    "description": "Waltz Lemon, Energy Drink, 12 Fl oz \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/WaltzLemonEnergyDrink-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809644050175",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-WALTZ-LE"
+      }
+    ]
+  },
+  {
+    "handle": "sparkling-tea-taverb-club-16-fl-oz",
+    "shopify_id": "9177230147813",
+    "title": "Sparkling Tea Taverb Club 16 Fl Oz",
+    "category": "Beverages",
+    "description": "Sparkling Tea Taverb Club 16 Fl Oz \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SparklingTeaTaverbClub-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809424368371",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SPARKLIN"
+      }
+    ]
+  },
+  {
+    "handle": "topo-chico-mixers-tonic-water-16-fl-oz",
+    "shopify_id": "9177229721829",
+    "title": "Topo Chico Mixers Tonic Water 16 Fl Oz",
+    "category": "Beverages",
+    "description": "Topo Chico Mixers Tonic Water 16 Fl Oz \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/TopoChicoMixersTonicWater-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809487397221",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-TOPO-CHI"
+      }
+    ]
+  },
+  {
+    "handle": "simply-natural-100-juice-12-fl-oz",
+    "shopify_id": "9177229164773",
+    "title": "Simply Natural 100% Juice, 12 Fl oz",
+    "category": "Beverages",
+    "description": "Simply Natural 100% Juice, 12 Fl oz \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/SimplyNatural100Juice-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809308603903",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-SIMPLY-N"
+      }
+    ]
+  },
+  {
+    "handle": "organic-unsweetened-peach-green-tea-12-fl-oz",
+    "shopify_id": "9177228968165",
+    "title": "Organic Unsweetened Peach Green Tea 12 Fl Oz",
+    "category": "Beverages",
+    "description": "Organic Unsweetened Peach Green Tea 12 Fl Oz \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/OrganicUnsweetenedPeachGreenTea-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809205037225",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-ORGANIC-"
+      }
+    ]
+  },
+  {
+    "handle": "coffee-premium-original-blend-10-oz",
+    "shopify_id": null,
+    "title": "Coffee Premium Original Blend 10 Oz",
+    "category": "Beverages",
+    "description": "Coffee Premium Original Blend 10 Oz \u2014 fresh quality sourced for daily kitchens.",
+    "image": "/cdn/shop/files/CoffeePremiumOriginalBlend-1.jpg",
+    "variants": [
+      {
+        "shopify_variant_id": "46809800736636",
+        "title": "Standard",
+        "price_cents": 999,
+        "compare_at_cents": null,
+        "weight_g": 450,
+        "sku": "TRV-COFFEE-P"
+      }
+    ]
+  }
+]

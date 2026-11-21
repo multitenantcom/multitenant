@@ -1,0 +1,12 @@
+{
+  "name": "sarang-order-multitenant",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "dev": "node dev/server.mjs",
+    "themes": "node scripts/bundle-themes.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
