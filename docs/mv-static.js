@@ -191,12 +191,10 @@
           <h2 class="h3 mt-1 mb-2">${esc(prod?.title || '')}</h2>
           <div class="text-lg font-bold mb-2">${esc(money(priceIdr))}</div>
           <p class="text-sm opacity-80 mb-3">${esc(prod?.description || '')}</p>
-          <product-form class="product-form">
           <form method="post" action="${BASE}/cart/add" data-type="add-to-cart-form" class="flex flex-col gap-3">
             ${vars.length > 1 ? `<select name="id" class="form-control form-control--select">${opts}</select>` : `<input type="hidden" name="id" value="${esc(first?.shopify_variant_id || '')}">`}
             <div class="flex gap-2 items-center"><input type="number" name="quantity" value="1" min="1" class="form-control" style="width:80px"><button type="submit" name="add" class="btn btn--primary flex-1">Add to cart</button></div>
           </form>
-          </product-form>
         </div></div></div></div></body></html>`;
       return new Response(qvHtml, { status: 200, headers: { 'Content-Type': 'text/html' } });
     }
@@ -298,8 +296,8 @@
     if (!(form instanceof HTMLFormElement)) return;
     const act = form.getAttribute('action') || '';
     if (!act.includes('/cart/add')) return;
+    if (e.defaultPrevented) return;
     e.preventDefault();
-    if (form.closest('product-form') && window.customElements?.get('product-form')) return;
     const fd = new FormData(form);
     const r = await fetch(BASE + '/cart/add.js', { method: 'POST', body: fd });
     const data = await r.json();
