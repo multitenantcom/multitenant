@@ -1,7 +1,7 @@
--- Sarang Order (multi-tenant) – database setup for Supabase.
+-- multitenantcom (multi-tenant) – database setup for Supabase.
 -- Run once: Supabase dashboard → SQL Editor → paste this whole file → Run.
 --
--- SECURITY MODEL (same as sarang): only the server talks to the database, using the SECRET key.
+-- SECURITY MODEL: only the server talks to the database, using the SECRET key.
 -- Row Level Security is ON with NO policies, so the public anon/publishable key can read and write nothing.
 -- Every business table carries tenant_id; the server always filters by the tenant it resolved from the request.
 

@@ -1,7 +1,7 @@
-# Sarang Order – multi-tenant ordering platform (backend + storefront + back office)
+# multitenantcom – multi-tenant ordering platform (backend + storefront + back office)
 
 Many stores on one platform. Each store has its own theme, its own payment / shipping / Turnstile keys,
-its own warehouses and stock. Built from the sarang site's approach (Netlify functions + Supabase, server holds every secret,
+its own warehouses and stock. Built on Netlify functions + Supabase (server holds every secret,
 server recalculates every price), moved from a single `kv` table to proper tables with `tenant_id` on every row.
 
 ```
@@ -61,4 +61,4 @@ npm test      # 23 automated checks: isolation, signatures, stock, routing, expi
 npm run dev   # http://localhost:8888 with an in-memory database (super setup key: dev-setup-key-123456)
 ```
 
-Demo logins (type store address `sarang` in the first box; leave it empty for the platform admin): owner@sarang.test / demo-password-1 · platform admin admin@demo.test / demo-admin-pass · business cafe.biru / demo-password-1 · coupon WELCOME10.
+Demo logins (type store address `tukupack` or `anekafood` in the first box; leave it empty for the platform admin): owner@tukupack.test / demo-password-1 · owner@anekafood.test / demo-password-1 · platform admin admin@demo.test / demo-admin-pass · business cafe.biru / demo-password-1 · coupon WELCOME10.

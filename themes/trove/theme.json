@@ -1,7 +1,7 @@
 {
   "name": "Trove",
   "version": "1.0.0",
-  "author": "Hyper Trove × Sarang Order",
+  "author": "Hyper Trove × multitenantcom",
   "description": "High-volume food & packaging storefront inspired by Hyper Trove: announcement bar, mega category tiles, grid/rail shelves, quick-view cards, B2B promo band and FAQ.",
   "settings": [
     { "type": "header", "label": "Colours and type" },
