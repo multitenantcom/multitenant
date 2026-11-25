@@ -198,12 +198,13 @@ async function readBody(req) {
 
 async function resolveStore(req, url) {
   const q = (url.searchParams.get('store') || '').trim().toLowerCase();
+  const pathSlug = (url.pathname.match(/^\/(tukupack|anekafood)(\/|$)/i) || [])[1]?.toLowerCase() || '';
   const cookies = parseCookies(req.headers.cookie);
   const hdr = (req.headers['x-tenant'] || '').trim().toLowerCase();
-  const slug = q || hdr || cookies.mv_store || 'tukupack';
+  const slug = q || pathSlug || hdr || cookies.mv_store || 'tukupack';
   let t = await db.one('tenants', { slug });
   if (!t) t = await db.one('tenants', { slug: 'tukupack' });
-  const setCookie = q ? `mv_store=${encodeURIComponent(t.slug)}; Path=/; SameSite=Lax` : null;
+  const setCookie = (q || pathSlug) ? `mv_store=${encodeURIComponent(t.slug)}; Path=/; SameSite=Lax` : null;
   return { tenant: t, setCookie };
 }
 
@@ -505,7 +506,7 @@ function brandLogoHtml(tenant, footer = false) {
   if (footer) {
     return `<span class="mv-brand-logo"><span class="mv-brand-mark">${ini}</span><span class="mv-brand-text">${name}</span></span>`;
   }
-  return `<a href="/" class="h3 relative flex header__logo--text mv-brand-logo" aria-label="${name}"><span class="mv-brand-mark">${ini}</span><span class="mv-brand-text">${name}</span></a>`;
+  return `<a href="/${esc(tenant.slug)}" class="h3 relative flex header__logo--text mv-brand-logo" aria-label="${name}"><span class="mv-brand-mark">${ini}</span><span class="mv-brand-text">${name}</span></a>`;
 }
 
 async function injectBridge(html, tenant) {
@@ -680,7 +681,8 @@ http.createServer(async (req, res) => {
   }
 
   // Real multitheme.zip storefront files in storefront/
-  let sfTarget = rel ? path.join(STOREFRONT, rel) : path.join(STOREFRONT, 'index.html');
+  const isStoreRoot = /^\/(tukupack|anekafood)\/?$/i.test(pathname);
+  let sfTarget = (!rel || isStoreRoot) ? path.join(STOREFRONT, 'index.html') : path.join(STOREFRONT, rel);
   if (fs.existsSync(sfTarget) && fs.statSync(sfTarget).isDirectory()) sfTarget = path.join(sfTarget, 'index.html');
   else if (!fs.existsSync(sfTarget) && fs.existsSync(path.join(STOREFRONT, rel, 'index.html'))) sfTarget = path.join(STOREFRONT, rel, 'index.html');
 
@@ -699,4 +701,4 @@ http.createServer(async (req, res) => {
 
   res.writeHead(404);
   res.end('Not found');
-}).listen(PORT, () => console.log(`Tukupack:   http://localhost:${PORT}/?store=tukupack\nAnekafood:  http://localhost:${PORT}/?store=anekafood\nAdmin:      http://localhost:${PORT}/admin`));
+}).listen(PORT, () => console.log(`TukuPack:   http://localhost:${PORT}/tukupack  (or /?store=tukupack)\nAnekafood:  http://localhost:${PORT}/anekafood (or /?store=anekafood)\nAdmin:      http://localhost:${PORT}/admin`));

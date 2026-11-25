@@ -50,8 +50,10 @@ const STATIC_JS = `(() => {
   else if (qSuper === '0') localStorage.removeItem('mv_super_switcher');
   const superSwitcherOn = localStorage.getItem('mv_super_switcher') === '1';
 
+  const pathMatch = location.pathname.replace(BASE, '').match(/^\\/(tukupack|anekafood)(\\/|$)/i);
   const qStore = new URLSearchParams(location.search).get('store');
-  if (qStore && STORES[qStore.toLowerCase()]) localStorage.setItem('mv_gh_store', qStore.toLowerCase());
+  const resolved = (pathMatch && pathMatch[1].toLowerCase()) || (qStore && qStore.toLowerCase()) || '';
+  if (resolved && STORES[resolved]) localStorage.setItem('mv_gh_store', resolved);
   const slug = STORES[localStorage.getItem('mv_gh_store')] ? localStorage.getItem('mv_gh_store') : 'tukupack';
   const S = STORES[slug];
   const money = n => 'Rp ' + Math.round(Number(n || 0)).toLocaleString('id-ID');
@@ -300,8 +302,9 @@ const STATIC_JS = `(() => {
   function rebrandDom() {
     document.title = S.name + ' — Storefront';
     document.querySelectorAll('.announcement-bar__text, .announcement-bar__message p').forEach(el => { el.textContent = S.announcement; });
-    const hLogo = document.querySelector('a.header__logo--image');
+    const hLogo = document.querySelector('a.header__logo--image, a.header__logo--text');
     if (hLogo) {
+      hLogo.setAttribute('href', \`\${BASE}/\${S.slug}/\`);
       hLogo.className = 'h3 relative flex header__logo--text mv-brand-logo';
       hLogo.innerHTML = \`<span class="mv-brand-mark">\${S.ini}</span><span class="mv-brand-text">\${esc(S.name)}</span>\`;
     }
@@ -311,7 +314,7 @@ const STATIC_JS = `(() => {
       fWrap.innerHTML = \`<span class="mv-brand-logo"><span class="mv-brand-mark">\${S.ini}</span><span class="mv-brand-text">\${esc(S.name)}</span></span>\`;
     }
     const copy = document.querySelector('.footer__copyright-content');
-    if (copy) copy.innerHTML = \`&copy; 2026 <a class="link-underline" href="\${BASE}/">\${esc(S.name)}</a>.\`;
+    if (copy) copy.innerHTML = \`&copy; 2026 <a class="link-underline" href="\${BASE}/\${S.slug}/">\${esc(S.name)}</a>.\`;
   }
 
   async function refreshBadge() {
@@ -336,9 +339,7 @@ const STATIC_JS = `(() => {
     \`;
     document.body.appendChild(fab);
     document.getElementById('mv-store-sel').onchange = e => {
-      const u = new URL(location.href);
-      u.searchParams.set('store', e.target.value);
-      location.href = u.toString();
+      location.href = \`\${BASE}/\${e.target.value}/\${superSwitcherOn ? '?super=1' : ''}\`;
     };
     document.getElementById('mv-open-chk').onclick = openCheckout;
   }
@@ -701,13 +702,21 @@ function walk(dir) {
   }
 }
 walk(OUT);
+const baseHtml = fs.readFileSync(path.join(OUT, 'index.html'), 'utf8');
+for (const [slug, title] of [['anekafood', 'Anekafood Packaging'], ['tukupack', 'TukuPack']]) {
+  const dir = path.join(OUT, slug);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'index.html'), baseHtml.replace(/<title>[\s\S]*?<\/title>/i, `<title>${title}</title>`));
+}
 fs.writeFileSync(path.join(OUT, '404.html'), `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="refresh" content="0;url=${BASE}/">
 <title>Redirecting…</title>
-<script>location.replace('${BASE}/');</script>
+<script>
+  var m = location.pathname.match(/\\/(anekafood|tukupack)(?:\\/|$)/i);
+  location.replace(m ? '${BASE}/' + m[1].toLowerCase() + '/' : '${BASE}/');
+</script>
 </head>
 <body>Redirecting to <a href="${BASE}/">${BASE}/</a>…</body>
 </html>`);

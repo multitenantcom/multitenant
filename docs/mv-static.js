@@ -34,8 +34,10 @@
   else if (qSuper === '0') localStorage.removeItem('mv_super_switcher');
   const superSwitcherOn = localStorage.getItem('mv_super_switcher') === '1';
 
+  const pathMatch = location.pathname.replace(BASE, '').match(/^\/(tukupack|anekafood)(\/|$)/i);
   const qStore = new URLSearchParams(location.search).get('store');
-  if (qStore && STORES[qStore.toLowerCase()]) localStorage.setItem('mv_gh_store', qStore.toLowerCase());
+  const resolved = (pathMatch && pathMatch[1].toLowerCase()) || (qStore && qStore.toLowerCase()) || '';
+  if (resolved && STORES[resolved]) localStorage.setItem('mv_gh_store', resolved);
   const slug = STORES[localStorage.getItem('mv_gh_store')] ? localStorage.getItem('mv_gh_store') : 'tukupack';
   const S = STORES[slug];
   const money = n => 'Rp ' + Math.round(Number(n || 0)).toLocaleString('id-ID');
@@ -284,8 +286,9 @@
   function rebrandDom() {
     document.title = S.name + ' — Storefront';
     document.querySelectorAll('.announcement-bar__text, .announcement-bar__message p').forEach(el => { el.textContent = S.announcement; });
-    const hLogo = document.querySelector('a.header__logo--image');
+    const hLogo = document.querySelector('a.header__logo--image, a.header__logo--text');
     if (hLogo) {
+      hLogo.setAttribute('href', `${BASE}/${S.slug}/`);
       hLogo.className = 'h3 relative flex header__logo--text mv-brand-logo';
       hLogo.innerHTML = `<span class="mv-brand-mark">${S.ini}</span><span class="mv-brand-text">${esc(S.name)}</span>`;
     }
@@ -295,7 +298,7 @@
       fWrap.innerHTML = `<span class="mv-brand-logo"><span class="mv-brand-mark">${S.ini}</span><span class="mv-brand-text">${esc(S.name)}</span></span>`;
     }
     const copy = document.querySelector('.footer__copyright-content');
-    if (copy) copy.innerHTML = `&copy; 2026 <a class="link-underline" href="${BASE}/">${esc(S.name)}</a>.`;
+    if (copy) copy.innerHTML = `&copy; 2026 <a class="link-underline" href="${BASE}/${S.slug}/">${esc(S.name)}</a>.`;
   }
 
   async function refreshBadge() {
@@ -320,9 +323,7 @@
     `;
     document.body.appendChild(fab);
     document.getElementById('mv-store-sel').onchange = e => {
-      const u = new URL(location.href);
-      u.searchParams.set('store', e.target.value);
-      location.href = u.toString();
+      location.href = `${BASE}/${e.target.value}/${superSwitcherOn ? '?super=1' : ''}`;
     };
     document.getElementById('mv-open-chk').onclick = openCheckout;
   }

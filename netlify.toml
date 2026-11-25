@@ -6,6 +6,26 @@
   node_bundler = "esbuild"
 
 [[redirects]]
+  from = "/anekafood"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/anekafood/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/tukupack"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/tukupack/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
   from = "/admin"
   to = "/admin.html"
   status = 200

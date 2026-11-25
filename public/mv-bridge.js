@@ -1,5 +1,32 @@
 (() => {
-  const ctx = window.__MV_CONTEXT__ || { tenant: { slug: 'tukupack', name: 'TukuPack', theme: {}, settings: {} }, stores: [], warehouses: [] };
+  const hasServerCtx = Boolean(window.__MV_CONTEXT__);
+  function resolveClientSlug() {
+    const pm = location.pathname.match(/^\/(tukupack|anekafood)(\/|$)/i);
+    const qs = new URLSearchParams(location.search).get('store');
+    const explicit = (pm && pm[1].toLowerCase()) || (qs && qs.trim().toLowerCase()) || '';
+    if (explicit) { try { localStorage.setItem('mv_store', explicit); } catch {} return explicit; }
+    try { const saved = localStorage.getItem('mv_store'); if (saved) return saved; } catch {}
+    const host = location.hostname.toLowerCase();
+    const parts = host.split('.');
+    if (parts.length >= 3 && !host.endsWith('.netlify.app') && host !== 'localhost') return parts[0];
+    return 'tukupack';
+  }
+  const initSlug = hasServerCtx ? window.__MV_CONTEXT__.tenant.slug : resolveClientSlug();
+  const ctx = window.__MV_CONTEXT__ || {
+    tenant: {
+      slug: initSlug,
+      name: initSlug === 'anekafood' ? 'Anekafood Packaging' : 'TukuPack',
+      theme: initSlug === 'anekafood'
+        ? { primary: '#E60000', accent: '#FFDA1A', background: '#F5F5F5' }
+        : { primary: '#0058A3', accent: '#FFDA1A', background: '#F4F6F9' },
+      settings: {}
+    },
+    stores: [
+      { slug: 'tukupack', name: 'TukuPack' },
+      { slug: 'anekafood', name: 'Anekafood Packaging' }
+    ],
+    warehouses: []
+  };
   const tenant = ctx.tenant;
   const warehouses = ctx.warehouses || [];
   const money = n => 'Rp ' + Math.round(Number(n || 0)).toLocaleString('id-ID');
@@ -9,13 +36,67 @@
   let LIVE_MENU = [];
   let ACTIVE_CAT = 'All';
 
+  function hexToRgb(hex, fb) {
+    const m = String(hex || '').trim().match(/^#([0-9a-f]{6})$/i);
+    if (!m) return fb;
+    const n = parseInt(m[1], 16);
+    return `${(n >> 16) & 255},${(n >> 8) & 255},${n & 255}`;
+  }
+
+  function applyClientThemeCss() {
+    if (hasServerCtx && document.getElementById('mv-tenant-theme')) return;
+    const th = tenant.theme || {};
+    const isAneka = tenant.slug === 'anekafood';
+    const pHex = th.primary || (isAneka ? '#E60000' : '#0058A3');
+    const aHex = th.accent || '#FFDA1A';
+    const bHex = th.background || (isAneka ? '#F5F5F5' : '#F4F6F9');
+    const pRgb = hexToRgb(pHex, isAneka ? '230,0,0' : '0,88,163');
+    const aRgb = hexToRgb(aHex, '255,218,26');
+    const bRgb = hexToRgb(bHex, '244,246,249');
+    const aInk = isAneka ? '138,0,0' : '0,56,107';
+    const invBg = isAneka ? '168,0,0' : '0,62,117';
+    let st = document.getElementById('mv-tenant-theme');
+    if (!st) { st = document.createElement('style'); st.id = 'mv-tenant-theme'; document.head.appendChild(st); }
+    st.textContent = `
+      :root { --mv-primary:${pHex}; --mv-accent:${aHex}; --color-badge-sale:${pHex}; --color-badge-hot:${pHex}; --color-badge-new:${aHex}; --color-badge-new-text:#000; }
+      .color-scheme-1,.color-scheme-info { --color-background:${bRgb}; --color-primary:${pRgb}; --color-button:${pRgb}; --color-button-text:255,255,255; --color-product-price-sale:${pRgb}; --color-progress-bar:${pRgb}; }
+      .color-scheme-2 { --color-primary:${pRgb}; --color-button:${pRgb}; --color-button-text:255,255,255; --color-product-price-sale:${pRgb}; --color-progress-bar:${pRgb}; }
+      .color-scheme-inverse { --color-background:${invBg}; --color-secondary-background:${pRgb}; --color-primary:${aRgb}; --color-button:${aRgb}; --color-button-text:${aInk}; --color-border:${pRgb}; }
+      .color-scheme-3,.color-scheme-4,.color-scheme-7 { --color-background:${pRgb}; --color-primary:${aRgb}; --color-button:${aRgb}; --color-button-text:${aInk}; --color-secondary-button:${pRgb}; --color-secondary-button-border:${aRgb}; --color-secondary-button-text:255,255,255; }
+      .header .cart-count, cart-count { background-color:${aHex}!important; color:#000!important; }
+      .announcement-bar.color-scheme-inverse { background-color:${pHex}!important; color:#fff!important; }
+      .mv-brand-logo { display:inline-flex; align-items:center; gap:8px; max-width:100%; min-width:0; text-decoration:none; color:inherit; font-family:Poppins,sans-serif; font-weight:800; }
+      .mv-brand-mark { display:inline-grid; place-items:center; width:32px; height:32px; border-radius:8px; background:${pHex}; color:${aHex}; font-size:15px; font-weight:800; flex-shrink:0; }
+      .mv-brand-text { font-size:clamp(13.5px,2.2vw,18px); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .footer .mv-brand-mark { background:${aHex}; color:${pHex}; }
+      .footer .mv-brand-text { color:#fff; font-size:19px; }
+      .mv-fab { background:${pHex}; }
+      .mv-fab .mv-chk { background:${aHex}; border-color:${aHex}; color:#000; }
+    `;
+  }
+
   function applyBranding() {
+    applyClientThemeCss();
     const ann = tenant.theme?.announcement;
     if (ann) {
       document.querySelectorAll('.announcement-bar__text, .announcement-bar__message p').forEach(el => {
         el.textContent = ann;
       });
     }
+    const ini = tenant.slug === 'anekafood' ? 'AP' : tenant.name.slice(0, 2).toUpperCase();
+    const hLogo = document.querySelector('a.header__logo--image, a.header__logo--text');
+    if (hLogo) {
+      hLogo.setAttribute('href', `/${tenant.slug}`);
+      hLogo.className = 'h3 relative flex header__logo--text mv-brand-logo';
+      hLogo.innerHTML = `<span class="mv-brand-mark">${esc(ini)}</span><span class="mv-brand-text">${esc(tenant.name)}</span>`;
+    }
+    const fWrap = document.querySelector('.footer-image-box__image');
+    if (fWrap && !fWrap.classList.contains('mv-footer-logo-wrap')) {
+      fWrap.classList.add('mv-footer-logo-wrap');
+      fWrap.innerHTML = `<span class="mv-brand-logo"><span class="mv-brand-mark">${esc(ini)}</span><span class="mv-brand-text">${esc(tenant.name)}</span></span>`;
+    }
+    const copy = document.querySelector('.footer__copyright-content');
+    if (copy && !hasServerCtx) copy.innerHTML = `&copy; 2026 <a class="link-underline" href="/${esc(tenant.slug)}">${esc(tenant.name)}</a>.`;
     document.title = `${tenant.name} — Storefront`;
   }
 
@@ -33,9 +114,7 @@
     `;
     document.body.appendChild(fab);
     document.getElementById('mv-store-sel').addEventListener('change', e => {
-      const u = new URL(location.href);
-      u.searchParams.set('store', e.target.value);
-      location.href = u.toString();
+      location.href = '/' + encodeURIComponent(e.target.value);
     });
     document.getElementById('mv-open-chk').addEventListener('click', openCheckout);
     document.getElementById('mv-open-orders').addEventListener('click', openOrderTracker);
@@ -119,11 +198,28 @@
   // ── Live Catalog synced with /api/menu (shows products added in /admin) ──
   async function loadLiveMenu() {
     try {
-      const [stRes, menuRes] = await Promise.all([
+      const reqs = [
         fetch('/api/store', { headers: { 'x-tenant': tenant.slug } }),
         fetch('/api/menu', { headers: { 'x-tenant': tenant.slug } })
-      ]);
-      if (stRes.ok) STORE_INFO = await stRes.json();
+      ];
+      if (!hasServerCtx) reqs.push(fetch('/api/directory'));
+      const [stRes, menuRes, dirRes] = await Promise.all(reqs);
+      if (stRes.ok) {
+        STORE_INFO = await stRes.json();
+        if (!hasServerCtx && STORE_INFO.store) {
+          tenant.name = STORE_INFO.store.name || tenant.name;
+          tenant.theme = { ...tenant.theme, ...(STORE_INFO.theme || {}) };
+          applyBranding();
+        }
+      }
+      if (dirRes?.ok) {
+        const dir = await dirRes.json();
+        if (dir.stores?.length) {
+          ctx.stores = dir.stores;
+          const sel = document.getElementById('mv-store-sel');
+          if (sel) sel.innerHTML = dir.stores.map(s => `<option value="${esc(s.slug)}" ${s.slug === tenant.slug ? 'selected' : ''}>${esc(s.name)}</option>`).join('');
+        }
+      }
       if (menuRes.ok) LIVE_MENU = (await menuRes.json()).products || [];
       renderLiveCatalog();
     } catch {}

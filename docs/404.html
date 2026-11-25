@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="refresh" content="0;url=/multitenant/">
 <title>Redirecting…</title>
-<script>location.replace('/multitenant/');</script>
+<script>
+  var m = location.pathname.match(/\/(anekafood|tukupack)(?:\/|$)/i);
+  location.replace(m ? '/multitenant/' + m[1].toLowerCase() + '/' : '/multitenant/');
+</script>
 </head>
 <body>Redirecting to <a href="/multitenant/">/multitenant/</a>…</body>
 </html>
